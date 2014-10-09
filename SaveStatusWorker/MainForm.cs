@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using System.Xml.Serialization;
 using VkNet;
 using VkNet.Enums.Filters;
 
@@ -32,9 +24,34 @@ namespace SaveStatusWorker
             vk.Authorize(settings.AppId, settings.Email, settings.Pass, scope);
             var x = ProfileFields.Status | ProfileFields.LastName | ProfileFields.FirstName;
             var frs = vk.Friends.Get((long)vk.UserId, x);
-            foreach (var fr in frs)
+            using (var context = new DbElements.VkEntities())
             {
-                textBox1.Text += fr.LastName+" "+fr.FirstName+" "+ fr.Status + Environment.NewLine;
+
+
+                DateTime date = DateTime.Now;
+                foreach (var fr in frs)
+                {
+                    var us = context.User.FirstOrDefault(u => u.Id == fr.Id);
+                    if(us== null)
+                    {
+                        context.User.Add(new DbElements.User()
+                                             {
+                                                 Id = fr.Id,
+                                                 LastName = fr.LastName,
+                                                 FirstName = fr.FirstName
+                                             });
+                    }
+                    var lastStatus = context.Status.Where(s => s.UserId == fr.Id).OrderByDescending(s => s.Date).FirstOrDefault();
+                    if (lastStatus == null || lastStatus.Text != fr.Status)
+                    {
+                        var status = new DbElements.Status();
+                        status.Text = fr.Status;
+                        status.UserId = fr.Id;
+                        status.Date = date;
+                        context.Status.Add(status);
+                    }
+                }
+                context.SaveChanges();
             }
         }
 

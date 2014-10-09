@@ -1,0 +1,1595 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище Model" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="Хранилище ModelContainer">
+          <EntitySet Name="Album" EntityType="Хранилище Model.Album" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ApplicationContent" EntityType="Хранилище Model.ApplicationContent" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Audio" EntityType="Хранилище Model.Audio" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="AudioGenre" EntityType="Хранилище Model.AudioGenre" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Document" EntityType="Хранилище Model.Document" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Graffiti" EntityType="Хранилище Model.Graffiti" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Link" EntityType="Хранилище Model.Link" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Message" EntityType="Хранилище Model.Message" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="MessageAttachment" EntityType="Хранилище Model.MessageAttachment" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Note" EntityType="Хранилище Model.Note" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Photo" EntityType="Хранилище Model.Photo" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PhotoPreviews" EntityType="Хранилище Model.PhotoPreviews" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Poll" EntityType="Хранилище Model.Poll" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PollAnswer" EntityType="Хранилище Model.PollAnswer" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Status" EntityType="Хранилище Model.Status" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Sticker" EntityType="Хранилище Model.Sticker" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="User" EntityType="Хранилище Model.User" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Video" EntityType="Хранилище Model.Video" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="Album_fk" Association="Хранилище Model.Album_fk">
+            <End Role="Photo" EntitySet="Photo" />
+            <End Role="Album" EntitySet="Album" />
+          </AssociationSet>
+          <AssociationSet Name="Audio_GenreId_fk" Association="Хранилище Model.Audio_GenreId_fk">
+            <End Role="AudioGenre" EntitySet="AudioGenre" />
+            <End Role="Audio" EntitySet="Audio" />
+          </AssociationSet>
+          <AssociationSet Name="Message_OwnerId_fk" Association="Хранилище Model.Message_OwnerId_fk">
+            <End Role="User" EntitySet="User" />
+            <End Role="Message" EntitySet="Message" />
+          </AssociationSet>
+          <AssociationSet Name="Message_ParentGuid_fk" Association="Хранилище Model.Message_ParentGuid_fk">
+            <End Role="Message" EntitySet="Message" />
+            <End Role="Message1" EntitySet="Message" />
+          </AssociationSet>
+          <AssociationSet Name="Message_UserId_fk" Association="Хранилище Model.Message_UserId_fk">
+            <End Role="User" EntitySet="User" />
+            <End Role="Message" EntitySet="Message" />
+          </AssociationSet>
+          <AssociationSet Name="MessageAttachment_AlbumId_fk" Association="Хранилище Model.MessageAttachment_AlbumId_fk">
+            <End Role="Album" EntitySet="Album" />
+            <End Role="MessageAttachment" EntitySet="MessageAttachment" />
+          </AssociationSet>
+          <AssociationSet Name="MessageAttachment_Audio_fk" Association="Хранилище Model.MessageAttachment_Audio_fk">
+            <End Role="Audio" EntitySet="Audio" />
+            <End Role="MessageAttachment" EntitySet="MessageAttachment" />
+          </AssociationSet>
+          <AssociationSet Name="MessageAttachment_DocumentId_fk" Association="Хранилище Model.MessageAttachment_DocumentId_fk">
+            <End Role="Document" EntitySet="Document" />
+            <End Role="MessageAttachment" EntitySet="MessageAttachment" />
+          </AssociationSet>
+          <AssociationSet Name="MessageAttachment_fk" Association="Хранилище Model.MessageAttachment_fk">
+            <End Role="ApplicationContent" EntitySet="ApplicationContent" />
+            <End Role="MessageAttachment" EntitySet="MessageAttachment" />
+          </AssociationSet>
+          <AssociationSet Name="MessageAttachment_GraffityId_fk" Association="Хранилище Model.MessageAttachment_GraffityId_fk">
+            <End Role="Graffiti" EntitySet="Graffiti" />
+            <End Role="MessageAttachment" EntitySet="MessageAttachment" />
+          </AssociationSet>
+          <AssociationSet Name="MessageAttachment_LinkId_fk" Association="Хранилище Model.MessageAttachment_LinkId_fk">
+            <End Role="Link" EntitySet="Link" />
+            <End Role="MessageAttachment" EntitySet="MessageAttachment" />
+          </AssociationSet>
+          <AssociationSet Name="MessageAttachment_MessageGuid_fk" Association="Хранилище Model.MessageAttachment_MessageGuid_fk">
+            <End Role="Message" EntitySet="Message" />
+            <End Role="MessageAttachment" EntitySet="MessageAttachment" />
+          </AssociationSet>
+          <AssociationSet Name="MessageAttachment_NoteId_fk" Association="Хранилище Model.MessageAttachment_NoteId_fk">
+            <End Role="Note" EntitySet="Note" />
+            <End Role="MessageAttachment" EntitySet="MessageAttachment" />
+          </AssociationSet>
+          <AssociationSet Name="MessageAttachment_PhotoId_fk" Association="Хранилище Model.MessageAttachment_PhotoId_fk">
+            <End Role="Photo" EntitySet="Photo" />
+            <End Role="MessageAttachment" EntitySet="MessageAttachment" />
+          </AssociationSet>
+          <AssociationSet Name="MessageAttachment_PollId_fk" Association="Хранилище Model.MessageAttachment_PollId_fk">
+            <End Role="Poll" EntitySet="Poll" />
+            <End Role="MessageAttachment" EntitySet="MessageAttachment" />
+          </AssociationSet>
+          <AssociationSet Name="MessageAttachment_StickerId_fk" Association="Хранилище Model.MessageAttachment_StickerId_fk">
+            <End Role="Sticker" EntitySet="Sticker" />
+            <End Role="MessageAttachment" EntitySet="MessageAttachment" />
+          </AssociationSet>
+          <AssociationSet Name="MessageAttachment_Video_fk" Association="Хранилище Model.MessageAttachment_Video_fk">
+            <End Role="Video" EntitySet="Video" />
+            <End Role="MessageAttachment" EntitySet="MessageAttachment" />
+          </AssociationSet>
+          <AssociationSet Name="PollAnswer_fk" Association="Хранилище Model.PollAnswer_fk">
+            <End Role="Poll" EntitySet="Poll" />
+            <End Role="PollAnswer" EntitySet="PollAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="User_PreviewsGuid_fk" Association="Хранилище Model.User_PreviewsGuid_fk">
+            <End Role="PhotoPreviews" EntitySet="PhotoPreviews" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Album">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="ThumbId" Type="bigint" />
+          <Property Name="Title" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="Size" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ApplicationContent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Photo130" Type="nvarchar(max)" />
+          <Property Name="Photo604" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Audio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="OwnerId" Type="bigint" />
+          <Property Name="Artist" Type="nvarchar(max)" />
+          <Property Name="Title" Type="nvarchar(max)" />
+          <Property Name="Duration" Type="int" Nullable="false" />
+          <Property Name="Url" Type="nvarchar(max)" />
+          <Property Name="LyricsId" Type="bigint" />
+          <Property Name="AlbumId" Type="bigint" />
+          <Property Name="GenreId" Type="int" />
+        </EntityType>
+        <EntityType Name="AudioGenre">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" />
+          <Property Name="Size" Type="bigint" />
+          <Property Name="Ext" Type="nvarchar(max)" />
+          <Property Name="Url" Type="nvarchar(max)" />
+          <Property Name="Photo100" Type="nvarchar(max)" />
+          <Property Name="Photo130" Type="nvarchar(max)" />
+          <Property Name="AccessKey" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Graffiti">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Photo200" Type="nvarchar(max)" />
+          <Property Name="Photo586" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Link">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Url" Type="nvarchar(max)" />
+          <Property Name="Title" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Image" Type="nvarchar(max)" />
+          <Property Name="PreviewPage" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="Guid" />
+          </Key>
+          <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OwnerId" Type="bigint" Nullable="false" />
+          <Property Name="Id" Type="bigint" />
+          <Property Name="UserId" Type="bigint" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="ReadStateId" Type="int" />
+          <Property Name="TypeId" Type="int" />
+          <Property Name="Title" Type="nvarchar(max)" />
+          <Property Name="Body" Type="nvarchar(max)" />
+          <Property Name="IsContainsEmojiSmiles" Type="bit" Nullable="false" />
+          <Property Name="IsImportant" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="ChatId" Type="bigint" />
+          <Property Name="UsersCount" Type="int" />
+          <Property Name="AdminId" Type="bigint" />
+          <Property Name="PhotoPreviewsId" Type="int" />
+          <Property Name="ParentGuid" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="MessageAttachment">
+          <Key>
+            <PropertyRef Name="Guid" />
+          </Key>
+          <Property Name="MessageGuid" Type="uniqueidentifier" />
+          <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PhotoId" Type="bigint" />
+          <Property Name="VideoId" Type="bigint" />
+          <Property Name="AudioId" Type="bigint" />
+          <Property Name="DocumentId" Type="bigint" />
+          <Property Name="GraffitiId" Type="bigint" />
+          <Property Name="LinkId" Type="bigint" />
+          <Property Name="NoteId" Type="bigint" />
+          <Property Name="ApplicationContentId" Type="bigint" />
+          <Property Name="PollId" Type="bigint" />
+          <Property Name="PageId" Type="bigint" />
+          <Property Name="AlbumId" Type="bigint" />
+          <Property Name="StickerId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Note">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" />
+          <Property Name="Text" Type="nvarchar(max)" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="CommentsCount" Type="int" />
+          <Property Name="ReadCommentsCount" Type="int" />
+        </EntityType>
+        <EntityType Name="Photo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="OwnerId" Type="bigint" />
+          <Property Name="AlbumId" Type="bigint" />
+          <Property Name="Photo75" Type="nvarchar(max)" />
+          <Property Name="Photo130" Type="nvarchar(max)" />
+          <Property Name="Photo604" Type="nvarchar(max)" />
+          <Property Name="Photo807" Type="nvarchar(max)" />
+          <Property Name="Photo1280" Type="nvarchar(max)" />
+          <Property Name="Photo2560" Type="nvarchar(max)" />
+          <Property Name="Width" Type="int" />
+          <Property Name="Height" Type="int" />
+          <Property Name="Text" Type="nvarchar(max)" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="AccessKey" Type="nvarchar(max)" />
+          <Property Name="UserId" Type="bigint" />
+          <Property Name="PostId" Type="bigint" />
+          <Property Name="PlacerId" Type="bigint" />
+          <Property Name="TagCreated" Type="datetime" />
+          <Property Name="TagId" Type="bigint" />
+          <Property Name="CanComment" Type="bit" />
+          <Property Name="PhotoSrc" Type="nvarchar(max)" />
+          <Property Name="PhotoHash" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="PhotoPreviews">
+          <Key>
+            <PropertyRef Name="Guid" />
+          </Key>
+          <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Photo50" Type="nvarchar(max)" />
+          <Property Name="Photo100" Type="nvarchar(max)" />
+          <Property Name="Photo200" Type="nvarchar(max)" />
+          <Property Name="Photo400" Type="nvarchar(max)" />
+          <Property Name="PhotoMax" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Poll">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Question" Type="nvarchar(max)" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="Votes" Type="int" Nullable="false" />
+          <Property Name="AnswerId" Type="bigint" />
+          <Property Name="IsAnonymous" Type="bit" />
+        </EntityType>
+        <EntityType Name="PollAnswer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Text" Type="nvarchar(max)" />
+          <Property Name="Votes" Type="int" />
+          <Property Name="Rate" Type="float" />
+          <Property Name="PollId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="nvarchar(max)" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="UserId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Sticker">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Photo64" Type="nvarchar(max)" />
+          <Property Name="Photo128" Type="nvarchar(max)" />
+          <Property Name="Photo256" Type="nvarchar(max)" />
+          <Property Name="Width" Type="int" />
+          <Property Name="Height" Type="int" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="SexId" Type="int" />
+          <Property Name="BirthDate" Type="nvarchar(max)" />
+          <Property Name="CityId" Type="int" />
+          <Property Name="CountryId" Type="int" />
+          <Property Name="PhotoPreviewsId" Type="int" />
+          <Property Name="IsOnline" Type="bit" />
+          <Property Name="Domain" Type="nvarchar(max)" />
+          <Property Name="IsHasMobile" Type="int" />
+          <Property Name="ModiblePhone" Type="nvarchar(max)" />
+          <Property Name="HomePhone" Type="nvarchar(max)" />
+          <Property Name="ConnectionsId" Type="int" />
+          <Property Name="Site" Type="bit" />
+          <Property Name="EducationId" Type="int" />
+          <Property Name="IsCanPost" Type="bit" />
+          <Property Name="IsCanSeeAllPosts" Type="bit" />
+          <Property Name="IsCanSeeAudio" Type="bit" />
+          <Property Name="IsCanWritePrivateMessage" Type="bit" />
+          <Property Name="Status" Type="nvarchar(max)" />
+          <Property Name="LastSeen" Type="datetime" />
+          <Property Name="CommonCount" Type="int" />
+          <Property Name="RelationTypeId" Type="int" />
+          <Property Name="BanInfoId" Type="int" />
+          <Property Name="IsDeactivated" Type="int" />
+          <Property Name="DeactiveReason" Type="nvarchar(max)" />
+          <Property Name="NickName" Type="nvarchar(max)" />
+          <Property Name="Timezone" Type="int" />
+          <Property Name="Language" Type="bigint" />
+          <Property Name="IsOnlineMobile" Type="bit" />
+          <Property Name="OnlineApp" Type="bigint" />
+          <Property Name="RelationPartnerId" Type="bigint" />
+          <Property Name="StandInLifeId" Type="int" />
+          <Property Name="Interests" Type="nvarchar(max)" />
+          <Property Name="Music" Type="nvarchar(max)" />
+          <Property Name="Activities" Type="nvarchar(max)" />
+          <Property Name="Movies" Type="nvarchar(max)" />
+          <Property Name="Tv" Type="nvarchar(max)" />
+          <Property Name="Books" Type="nvarchar(max)" />
+          <Property Name="Games" Type="nvarchar(max)" />
+          <Property Name="About" Type="nvarchar(max)" />
+          <Property Name="Quotes" Type="nvarchar(max)" />
+          <Property Name="InvitedBy" Type="bit" />
+          <Property Name="MaidenName" Type="int" />
+          <Property Name="BirthdayVisibilityId" Type="int" />
+          <Property Name="HomeTown" Type="int" Nullable="false" />
+          <Property Name="ChangeNameRequestId" Type="int" />
+          <Property Name="PreviewsGuid" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="Video">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="OwnerId" Type="bigint" />
+          <Property Name="Title" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Duration" Type="int" />
+          <Property Name="Link" Type="nvarchar(max)" />
+          <Property Name="Photo130" Type="nvarchar(max)" />
+          <Property Name="Photo320" Type="nvarchar(max)" />
+          <Property Name="Photo640" Type="nvarchar(max)" />
+          <Property Name="CommentsCount" Type="int" />
+          <Property Name="ViewsCount" Type="int" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="Player" Type="nvarchar(max)" />
+          <Property Name="Repeat" Type="bit" />
+          <Property Name="AlbumId" Type="bigint" />
+          <Property Name="UploadUrl" Type="nvarchar(max)" />
+          <Property Name="AccessKey" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="Album_fk">
+          <End Role="Photo" Type="Хранилище Model.Photo" Multiplicity="0..1" />
+          <End Role="Album" Type="Хранилище Model.Album" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Album">
+              <PropertyRef Name="ThumbId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Audio_GenreId_fk">
+          <End Role="AudioGenre" Type="Хранилище Model.AudioGenre" Multiplicity="0..1" />
+          <End Role="Audio" Type="Хранилище Model.Audio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AudioGenre">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Audio">
+              <PropertyRef Name="GenreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Message_OwnerId_fk">
+          <End Role="User" Type="Хранилище Model.User" Multiplicity="1" />
+          <End Role="Message" Type="Хранилище Model.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="OwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Message_ParentGuid_fk">
+          <End Role="Message" Type="Хранилище Model.Message" Multiplicity="0..1" />
+          <End Role="Message1" Type="Хранилище Model.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Message">
+              <PropertyRef Name="Guid" />
+            </Principal>
+            <Dependent Role="Message1">
+              <PropertyRef Name="ParentGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Message_UserId_fk">
+          <End Role="User" Type="Хранилище Model.User" Multiplicity="0..1" />
+          <End Role="Message" Type="Хранилище Model.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MessageAttachment_AlbumId_fk">
+          <End Role="Album" Type="Хранилище Model.Album" Multiplicity="0..1" />
+          <End Role="MessageAttachment" Type="Хранилище Model.MessageAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Album">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MessageAttachment">
+              <PropertyRef Name="AlbumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MessageAttachment_Audio_fk">
+          <End Role="Audio" Type="Хранилище Model.Audio" Multiplicity="0..1" />
+          <End Role="MessageAttachment" Type="Хранилище Model.MessageAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Audio">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MessageAttachment">
+              <PropertyRef Name="AudioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MessageAttachment_DocumentId_fk">
+          <End Role="Document" Type="Хранилище Model.Document" Multiplicity="0..1" />
+          <End Role="MessageAttachment" Type="Хранилище Model.MessageAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Document">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MessageAttachment">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MessageAttachment_fk">
+          <End Role="ApplicationContent" Type="Хранилище Model.ApplicationContent" Multiplicity="0..1" />
+          <End Role="MessageAttachment" Type="Хранилище Model.MessageAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationContent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MessageAttachment">
+              <PropertyRef Name="ApplicationContentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MessageAttachment_GraffityId_fk">
+          <End Role="Graffiti" Type="Хранилище Model.Graffiti" Multiplicity="0..1" />
+          <End Role="MessageAttachment" Type="Хранилище Model.MessageAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Graffiti">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MessageAttachment">
+              <PropertyRef Name="GraffitiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MessageAttachment_LinkId_fk">
+          <End Role="Link" Type="Хранилище Model.Link" Multiplicity="0..1" />
+          <End Role="MessageAttachment" Type="Хранилище Model.MessageAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Link">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MessageAttachment">
+              <PropertyRef Name="LinkId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MessageAttachment_MessageGuid_fk">
+          <End Role="Message" Type="Хранилище Model.Message" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MessageAttachment" Type="Хранилище Model.MessageAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Message">
+              <PropertyRef Name="Guid" />
+            </Principal>
+            <Dependent Role="MessageAttachment">
+              <PropertyRef Name="MessageGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MessageAttachment_NoteId_fk">
+          <End Role="Note" Type="Хранилище Model.Note" Multiplicity="0..1" />
+          <End Role="MessageAttachment" Type="Хранилище Model.MessageAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Note">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MessageAttachment">
+              <PropertyRef Name="NoteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MessageAttachment_PhotoId_fk">
+          <End Role="Photo" Type="Хранилище Model.Photo" Multiplicity="0..1" />
+          <End Role="MessageAttachment" Type="Хранилище Model.MessageAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MessageAttachment">
+              <PropertyRef Name="PhotoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MessageAttachment_PollId_fk">
+          <End Role="Poll" Type="Хранилище Model.Poll" Multiplicity="0..1" />
+          <End Role="MessageAttachment" Type="Хранилище Model.MessageAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Poll">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MessageAttachment">
+              <PropertyRef Name="PollId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MessageAttachment_StickerId_fk">
+          <End Role="Sticker" Type="Хранилище Model.Sticker" Multiplicity="0..1" />
+          <End Role="MessageAttachment" Type="Хранилище Model.MessageAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sticker">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MessageAttachment">
+              <PropertyRef Name="StickerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MessageAttachment_Video_fk">
+          <End Role="Video" Type="Хранилище Model.Video" Multiplicity="0..1" />
+          <End Role="MessageAttachment" Type="Хранилище Model.MessageAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Video">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MessageAttachment">
+              <PropertyRef Name="VideoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PollAnswer_fk">
+          <End Role="Poll" Type="Хранилище Model.Poll" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PollAnswer" Type="Хранилище Model.PollAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Poll">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PollAnswer">
+              <PropertyRef Name="PollId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_PreviewsGuid_fk">
+          <End Role="PhotoPreviews" Type="Хранилище Model.PhotoPreviews" Multiplicity="0..1" />
+          <End Role="User" Type="Хранилище Model.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhotoPreviews">
+              <PropertyRef Name="Guid" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="PreviewsGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="VkEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Album" EntityType="Model.Album" />
+          <EntitySet Name="ApplicationContent" EntityType="Model.ApplicationContent" />
+          <EntitySet Name="Audio" EntityType="Model.Audio" />
+          <EntitySet Name="AudioGenre" EntityType="Model.AudioGenre" />
+          <EntitySet Name="Document" EntityType="Model.Document" />
+          <EntitySet Name="Graffiti" EntityType="Model.Graffiti" />
+          <EntitySet Name="Link" EntityType="Model.Link" />
+          <EntitySet Name="Message" EntityType="Model.Message" />
+          <EntitySet Name="MessageAttachment" EntityType="Model.MessageAttachment" />
+          <EntitySet Name="Note" EntityType="Model.Note" />
+          <EntitySet Name="Photo" EntityType="Model.Photo" />
+          <EntitySet Name="PhotoPreviews" EntityType="Model.PhotoPreviews" />
+          <EntitySet Name="Poll" EntityType="Model.Poll" />
+          <EntitySet Name="PollAnswer" EntityType="Model.PollAnswer" />
+          <EntitySet Name="Sticker" EntityType="Model.Sticker" />
+          <EntitySet Name="User" EntityType="Model.User" />
+          <EntitySet Name="Video" EntityType="Model.Video" />
+          <AssociationSet Name="Album_fk" Association="Model.Album_fk">
+            <End Role="Photo" EntitySet="Photo" />
+            <End Role="Album" EntitySet="Album" />
+          </AssociationSet>
+          <AssociationSet Name="MessageAttachment_AlbumId_fk" Association="Model.MessageAttachment_AlbumId_fk">
+            <End Role="Album" EntitySet="Album" />
+            <End Role="MessageAttachment" EntitySet="MessageAttachment" />
+          </AssociationSet>
+          <AssociationSet Name="MessageAttachment_fk" Association="Model.MessageAttachment_fk">
+            <End Role="ApplicationContent" EntitySet="ApplicationContent" />
+            <End Role="MessageAttachment" EntitySet="MessageAttachment" />
+          </AssociationSet>
+          <AssociationSet Name="Audio_GenreId_fk" Association="Model.Audio_GenreId_fk">
+            <End Role="AudioGenre" EntitySet="AudioGenre" />
+            <End Role="Audio" EntitySet="Audio" />
+          </AssociationSet>
+          <AssociationSet Name="MessageAttachment_Audio_fk" Association="Model.MessageAttachment_Audio_fk">
+            <End Role="Audio" EntitySet="Audio" />
+            <End Role="MessageAttachment" EntitySet="MessageAttachment" />
+          </AssociationSet>
+          <AssociationSet Name="MessageAttachment_DocumentId_fk" Association="Model.MessageAttachment_DocumentId_fk">
+            <End Role="Document" EntitySet="Document" />
+            <End Role="MessageAttachment" EntitySet="MessageAttachment" />
+          </AssociationSet>
+          <AssociationSet Name="MessageAttachment_GraffityId_fk" Association="Model.MessageAttachment_GraffityId_fk">
+            <End Role="Graffiti" EntitySet="Graffiti" />
+            <End Role="MessageAttachment" EntitySet="MessageAttachment" />
+          </AssociationSet>
+          <AssociationSet Name="MessageAttachment_LinkId_fk" Association="Model.MessageAttachment_LinkId_fk">
+            <End Role="Link" EntitySet="Link" />
+            <End Role="MessageAttachment" EntitySet="MessageAttachment" />
+          </AssociationSet>
+          <AssociationSet Name="Message_OwnerId_fk" Association="Model.Message_OwnerId_fk">
+            <End Role="User" EntitySet="User" />
+            <End Role="Message" EntitySet="Message" />
+          </AssociationSet>
+          <AssociationSet Name="Message_ParentGuid_fk" Association="Model.Message_ParentGuid_fk">
+            <End Role="Message" EntitySet="Message" />
+            <End Role="Message1" EntitySet="Message" />
+          </AssociationSet>
+          <AssociationSet Name="Message_UserId_fk" Association="Model.Message_UserId_fk">
+            <End Role="User" EntitySet="User" />
+            <End Role="Message" EntitySet="Message" />
+          </AssociationSet>
+          <AssociationSet Name="MessageAttachment_MessageGuid_fk" Association="Model.MessageAttachment_MessageGuid_fk">
+            <End Role="Message" EntitySet="Message" />
+            <End Role="MessageAttachment" EntitySet="MessageAttachment" />
+          </AssociationSet>
+          <AssociationSet Name="MessageAttachment_NoteId_fk" Association="Model.MessageAttachment_NoteId_fk">
+            <End Role="Note" EntitySet="Note" />
+            <End Role="MessageAttachment" EntitySet="MessageAttachment" />
+          </AssociationSet>
+          <AssociationSet Name="MessageAttachment_PhotoId_fk" Association="Model.MessageAttachment_PhotoId_fk">
+            <End Role="Photo" EntitySet="Photo" />
+            <End Role="MessageAttachment" EntitySet="MessageAttachment" />
+          </AssociationSet>
+          <AssociationSet Name="MessageAttachment_PollId_fk" Association="Model.MessageAttachment_PollId_fk">
+            <End Role="Poll" EntitySet="Poll" />
+            <End Role="MessageAttachment" EntitySet="MessageAttachment" />
+          </AssociationSet>
+          <AssociationSet Name="MessageAttachment_StickerId_fk" Association="Model.MessageAttachment_StickerId_fk">
+            <End Role="Sticker" EntitySet="Sticker" />
+            <End Role="MessageAttachment" EntitySet="MessageAttachment" />
+          </AssociationSet>
+          <AssociationSet Name="MessageAttachment_Video_fk" Association="Model.MessageAttachment_Video_fk">
+            <End Role="Video" EntitySet="Video" />
+            <End Role="MessageAttachment" EntitySet="MessageAttachment" />
+          </AssociationSet>
+          <AssociationSet Name="User_PreviewsGuid_fk" Association="Model.User_PreviewsGuid_fk">
+            <End Role="PhotoPreviews" EntitySet="PhotoPreviews" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="PollAnswer_fk" Association="Model.PollAnswer_fk">
+            <End Role="Poll" EntitySet="Poll" />
+            <End Role="PollAnswer" EntitySet="PollAnswer" />
+          </AssociationSet>
+          <EntitySet Name="Status" EntityType="Model.Status" />
+        </EntityContainer>
+        <EntityType Name="Album">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="ThumbId" Type="Int64" />
+          <Property Name="Title" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="Size" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Photo" Relationship="Model.Album_fk" FromRole="Album" ToRole="Photo" />
+          <NavigationProperty Name="MessageAttachment" Relationship="Model.MessageAttachment_AlbumId_fk" FromRole="Album" ToRole="MessageAttachment" />
+        </EntityType>
+        <EntityType Name="ApplicationContent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Photo130" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Photo604" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="MessageAttachment" Relationship="Model.MessageAttachment_fk" FromRole="ApplicationContent" ToRole="MessageAttachment" />
+        </EntityType>
+        <EntityType Name="Audio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="OwnerId" Type="Int64" />
+          <Property Name="Artist" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Title" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Duration" Type="Int32" Nullable="false" />
+          <Property Name="Url" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="LyricsId" Type="Int64" />
+          <Property Name="AlbumId" Type="Int64" />
+          <Property Name="GenreId" Type="Int32" />
+          <NavigationProperty Name="AudioGenre" Relationship="Model.Audio_GenreId_fk" FromRole="Audio" ToRole="AudioGenre" />
+          <NavigationProperty Name="MessageAttachment" Relationship="Model.MessageAttachment_Audio_fk" FromRole="Audio" ToRole="MessageAttachment" />
+        </EntityType>
+        <EntityType Name="AudioGenre">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Audio" Relationship="Model.Audio_GenreId_fk" FromRole="AudioGenre" ToRole="Audio" />
+        </EntityType>
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Size" Type="Int64" />
+          <Property Name="Ext" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Url" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Photo100" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Photo130" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="AccessKey" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="MessageAttachment" Relationship="Model.MessageAttachment_DocumentId_fk" FromRole="Document" ToRole="MessageAttachment" />
+        </EntityType>
+        <EntityType Name="Graffiti">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Photo200" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Photo586" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="MessageAttachment" Relationship="Model.MessageAttachment_GraffityId_fk" FromRole="Graffiti" ToRole="MessageAttachment" />
+        </EntityType>
+        <EntityType Name="Link">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Url" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Title" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Image" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="PreviewPage" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="MessageAttachment" Relationship="Model.MessageAttachment_LinkId_fk" FromRole="Link" ToRole="MessageAttachment" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="Guid" />
+          </Key>
+          <Property Name="Guid" Type="Guid" Nullable="false" />
+          <Property Name="OwnerId" Type="Int64" Nullable="false" />
+          <Property Name="Id" Type="Int64" />
+          <Property Name="UserId" Type="Int64" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="ReadStateId" Type="Int32" />
+          <Property Name="TypeId" Type="Int32" />
+          <Property Name="Title" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Body" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="IsContainsEmojiSmiles" Type="Boolean" Nullable="false" />
+          <Property Name="IsImportant" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="ChatId" Type="Int64" />
+          <Property Name="UsersCount" Type="Int32" />
+          <Property Name="AdminId" Type="Int64" />
+          <Property Name="PhotoPreviewsId" Type="Int32" />
+          <Property Name="ParentGuid" Type="Guid" />
+          <NavigationProperty Name="User" Relationship="Model.Message_OwnerId_fk" FromRole="Message" ToRole="User" />
+          <NavigationProperty Name="Message1" Relationship="Model.Message_ParentGuid_fk" FromRole="Message" ToRole="Message1" />
+          <NavigationProperty Name="Message2" Relationship="Model.Message_ParentGuid_fk" FromRole="Message1" ToRole="Message" />
+          <NavigationProperty Name="User1" Relationship="Model.Message_UserId_fk" FromRole="Message" ToRole="User" />
+          <NavigationProperty Name="MessageAttachment" Relationship="Model.MessageAttachment_MessageGuid_fk" FromRole="Message" ToRole="MessageAttachment" />
+        </EntityType>
+        <EntityType Name="MessageAttachment">
+          <Key>
+            <PropertyRef Name="Guid" />
+          </Key>
+          <Property Name="MessageGuid" Type="Guid" />
+          <Property Name="Guid" Type="Guid" Nullable="false" />
+          <Property Name="PhotoId" Type="Int64" />
+          <Property Name="VideoId" Type="Int64" />
+          <Property Name="AudioId" Type="Int64" />
+          <Property Name="DocumentId" Type="Int64" />
+          <Property Name="GraffitiId" Type="Int64" />
+          <Property Name="LinkId" Type="Int64" />
+          <Property Name="NoteId" Type="Int64" />
+          <Property Name="ApplicationContentId" Type="Int64" />
+          <Property Name="PollId" Type="Int64" />
+          <Property Name="PageId" Type="Int64" />
+          <Property Name="AlbumId" Type="Int64" />
+          <Property Name="StickerId" Type="Int64" />
+          <NavigationProperty Name="Album" Relationship="Model.MessageAttachment_AlbumId_fk" FromRole="MessageAttachment" ToRole="Album" />
+          <NavigationProperty Name="ApplicationContent" Relationship="Model.MessageAttachment_fk" FromRole="MessageAttachment" ToRole="ApplicationContent" />
+          <NavigationProperty Name="Audio" Relationship="Model.MessageAttachment_Audio_fk" FromRole="MessageAttachment" ToRole="Audio" />
+          <NavigationProperty Name="Document" Relationship="Model.MessageAttachment_DocumentId_fk" FromRole="MessageAttachment" ToRole="Document" />
+          <NavigationProperty Name="Graffiti" Relationship="Model.MessageAttachment_GraffityId_fk" FromRole="MessageAttachment" ToRole="Graffiti" />
+          <NavigationProperty Name="Link" Relationship="Model.MessageAttachment_LinkId_fk" FromRole="MessageAttachment" ToRole="Link" />
+          <NavigationProperty Name="Message" Relationship="Model.MessageAttachment_MessageGuid_fk" FromRole="MessageAttachment" ToRole="Message" />
+          <NavigationProperty Name="Note" Relationship="Model.MessageAttachment_NoteId_fk" FromRole="MessageAttachment" ToRole="Note" />
+          <NavigationProperty Name="Photo" Relationship="Model.MessageAttachment_PhotoId_fk" FromRole="MessageAttachment" ToRole="Photo" />
+          <NavigationProperty Name="Poll" Relationship="Model.MessageAttachment_PollId_fk" FromRole="MessageAttachment" ToRole="Poll" />
+          <NavigationProperty Name="Sticker" Relationship="Model.MessageAttachment_StickerId_fk" FromRole="MessageAttachment" ToRole="Sticker" />
+          <NavigationProperty Name="Video" Relationship="Model.MessageAttachment_Video_fk" FromRole="MessageAttachment" ToRole="Video" />
+        </EntityType>
+        <EntityType Name="Note">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Text" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="CommentsCount" Type="Int32" />
+          <Property Name="ReadCommentsCount" Type="Int32" />
+          <NavigationProperty Name="MessageAttachment" Relationship="Model.MessageAttachment_NoteId_fk" FromRole="Note" ToRole="MessageAttachment" />
+        </EntityType>
+        <EntityType Name="Photo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="OwnerId" Type="Int64" />
+          <Property Name="AlbumId" Type="Int64" />
+          <Property Name="Photo75" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Photo130" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Photo604" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Photo807" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Photo1280" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Photo2560" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Width" Type="Int32" />
+          <Property Name="Height" Type="Int32" />
+          <Property Name="Text" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="AccessKey" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="UserId" Type="Int64" />
+          <Property Name="PostId" Type="Int64" />
+          <Property Name="PlacerId" Type="Int64" />
+          <Property Name="TagCreated" Type="DateTime" Precision="3" />
+          <Property Name="TagId" Type="Int64" />
+          <Property Name="CanComment" Type="Boolean" />
+          <Property Name="PhotoSrc" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="PhotoHash" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Album" Relationship="Model.Album_fk" FromRole="Photo" ToRole="Album" />
+          <NavigationProperty Name="MessageAttachment" Relationship="Model.MessageAttachment_PhotoId_fk" FromRole="Photo" ToRole="MessageAttachment" />
+        </EntityType>
+        <EntityType Name="PhotoPreviews">
+          <Key>
+            <PropertyRef Name="Guid" />
+          </Key>
+          <Property Name="Guid" Type="Guid" Nullable="false" />
+          <Property Name="Photo50" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Photo100" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Photo200" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Photo400" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="PhotoMax" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="User" Relationship="Model.User_PreviewsGuid_fk" FromRole="PhotoPreviews" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Poll">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Question" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Votes" Type="Int32" Nullable="false" />
+          <Property Name="AnswerId" Type="Int64" />
+          <Property Name="IsAnonymous" Type="Boolean" />
+          <NavigationProperty Name="MessageAttachment" Relationship="Model.MessageAttachment_PollId_fk" FromRole="Poll" ToRole="MessageAttachment" />
+          <NavigationProperty Name="PollAnswer" Relationship="Model.PollAnswer_fk" FromRole="Poll" ToRole="PollAnswer" />
+        </EntityType>
+        <EntityType Name="PollAnswer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Text" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Votes" Type="Int32" />
+          <Property Name="Rate" Type="Double" />
+          <Property Name="PollId" Type="Int64" />
+          <NavigationProperty Name="Poll" Relationship="Model.PollAnswer_fk" FromRole="PollAnswer" ToRole="Poll" />
+        </EntityType>
+        <EntityType Name="Sticker">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Photo64" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Photo128" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Photo256" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Width" Type="Int32" />
+          <Property Name="Height" Type="Int32" />
+          <NavigationProperty Name="MessageAttachment" Relationship="Model.MessageAttachment_StickerId_fk" FromRole="Sticker" ToRole="MessageAttachment" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="LastName" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="SexId" Type="Int32" />
+          <Property Name="BirthDate" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="CityId" Type="Int32" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="PhotoPreviewsId" Type="Int32" />
+          <Property Name="IsOnline" Type="Boolean" />
+          <Property Name="Domain" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="IsHasMobile" Type="Int32" />
+          <Property Name="ModiblePhone" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="HomePhone" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ConnectionsId" Type="Int32" />
+          <Property Name="Site" Type="Boolean" />
+          <Property Name="EducationId" Type="Int32" />
+          <Property Name="IsCanPost" Type="Boolean" />
+          <Property Name="IsCanSeeAllPosts" Type="Boolean" />
+          <Property Name="IsCanSeeAudio" Type="Boolean" />
+          <Property Name="IsCanWritePrivateMessage" Type="Boolean" />
+          <Property Name="Status" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="LastSeen" Type="DateTime" Precision="3" />
+          <Property Name="CommonCount" Type="Int32" />
+          <Property Name="RelationTypeId" Type="Int32" />
+          <Property Name="BanInfoId" Type="Int32" />
+          <Property Name="IsDeactivated" Type="Int32" />
+          <Property Name="DeactiveReason" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="NickName" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Timezone" Type="Int32" />
+          <Property Name="Language" Type="Int64" />
+          <Property Name="IsOnlineMobile" Type="Boolean" />
+          <Property Name="OnlineApp" Type="Int64" />
+          <Property Name="RelationPartnerId" Type="Int64" />
+          <Property Name="StandInLifeId" Type="Int32" />
+          <Property Name="Interests" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Music" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Activities" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Movies" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Tv" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Books" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Games" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="About" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Quotes" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="InvitedBy" Type="Boolean" />
+          <Property Name="MaidenName" Type="Int32" />
+          <Property Name="BirthdayVisibilityId" Type="Int32" />
+          <Property Name="HomeTown" Type="Int32" Nullable="false" />
+          <Property Name="ChangeNameRequestId" Type="Int32" />
+          <Property Name="PreviewsGuid" Type="Guid" />
+          <NavigationProperty Name="Message" Relationship="Model.Message_OwnerId_fk" FromRole="User" ToRole="Message" />
+          <NavigationProperty Name="Message1" Relationship="Model.Message_UserId_fk" FromRole="User" ToRole="Message" />
+          <NavigationProperty Name="PhotoPreviews" Relationship="Model.User_PreviewsGuid_fk" FromRole="User" ToRole="PhotoPreviews" />
+        </EntityType>
+        <EntityType Name="Video">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="OwnerId" Type="Int64" />
+          <Property Name="Title" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Duration" Type="Int32" />
+          <Property Name="Link" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Photo130" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Photo320" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Photo640" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="CommentsCount" Type="Int32" />
+          <Property Name="ViewsCount" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="Player" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Repeat" Type="Boolean" />
+          <Property Name="AlbumId" Type="Int64" />
+          <Property Name="UploadUrl" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="AccessKey" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="MessageAttachment" Relationship="Model.MessageAttachment_Video_fk" FromRole="Video" ToRole="MessageAttachment" />
+        </EntityType>
+        <Association Name="Album_fk">
+          <End Role="Photo" Type="Model.Photo" Multiplicity="0..1" />
+          <End Role="Album" Type="Model.Album" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Album">
+              <PropertyRef Name="ThumbId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MessageAttachment_AlbumId_fk">
+          <End Role="Album" Type="Model.Album" Multiplicity="0..1" />
+          <End Role="MessageAttachment" Type="Model.MessageAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Album">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MessageAttachment">
+              <PropertyRef Name="AlbumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MessageAttachment_fk">
+          <End Role="ApplicationContent" Type="Model.ApplicationContent" Multiplicity="0..1" />
+          <End Role="MessageAttachment" Type="Model.MessageAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationContent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MessageAttachment">
+              <PropertyRef Name="ApplicationContentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Audio_GenreId_fk">
+          <End Role="AudioGenre" Type="Model.AudioGenre" Multiplicity="0..1" />
+          <End Role="Audio" Type="Model.Audio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AudioGenre">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Audio">
+              <PropertyRef Name="GenreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MessageAttachment_Audio_fk">
+          <End Role="Audio" Type="Model.Audio" Multiplicity="0..1" />
+          <End Role="MessageAttachment" Type="Model.MessageAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Audio">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MessageAttachment">
+              <PropertyRef Name="AudioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MessageAttachment_DocumentId_fk">
+          <End Role="Document" Type="Model.Document" Multiplicity="0..1" />
+          <End Role="MessageAttachment" Type="Model.MessageAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Document">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MessageAttachment">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MessageAttachment_GraffityId_fk">
+          <End Role="Graffiti" Type="Model.Graffiti" Multiplicity="0..1" />
+          <End Role="MessageAttachment" Type="Model.MessageAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Graffiti">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MessageAttachment">
+              <PropertyRef Name="GraffitiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MessageAttachment_LinkId_fk">
+          <End Role="Link" Type="Model.Link" Multiplicity="0..1" />
+          <End Role="MessageAttachment" Type="Model.MessageAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Link">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MessageAttachment">
+              <PropertyRef Name="LinkId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Message_OwnerId_fk">
+          <End Role="User" Type="Model.User" Multiplicity="1" />
+          <End Role="Message" Type="Model.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="OwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Message_ParentGuid_fk">
+          <End Role="Message" Type="Model.Message" Multiplicity="0..1" />
+          <End Role="Message1" Type="Model.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Message">
+              <PropertyRef Name="Guid" />
+            </Principal>
+            <Dependent Role="Message1">
+              <PropertyRef Name="ParentGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Message_UserId_fk">
+          <End Role="User" Type="Model.User" Multiplicity="0..1" />
+          <End Role="Message" Type="Model.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MessageAttachment_MessageGuid_fk">
+          <End Role="Message" Type="Model.Message" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MessageAttachment" Type="Model.MessageAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Message">
+              <PropertyRef Name="Guid" />
+            </Principal>
+            <Dependent Role="MessageAttachment">
+              <PropertyRef Name="MessageGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MessageAttachment_NoteId_fk">
+          <End Role="Note" Type="Model.Note" Multiplicity="0..1" />
+          <End Role="MessageAttachment" Type="Model.MessageAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Note">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MessageAttachment">
+              <PropertyRef Name="NoteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MessageAttachment_PhotoId_fk">
+          <End Role="Photo" Type="Model.Photo" Multiplicity="0..1" />
+          <End Role="MessageAttachment" Type="Model.MessageAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MessageAttachment">
+              <PropertyRef Name="PhotoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MessageAttachment_PollId_fk">
+          <End Role="Poll" Type="Model.Poll" Multiplicity="0..1" />
+          <End Role="MessageAttachment" Type="Model.MessageAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Poll">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MessageAttachment">
+              <PropertyRef Name="PollId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MessageAttachment_StickerId_fk">
+          <End Role="Sticker" Type="Model.Sticker" Multiplicity="0..1" />
+          <End Role="MessageAttachment" Type="Model.MessageAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sticker">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MessageAttachment">
+              <PropertyRef Name="StickerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MessageAttachment_Video_fk">
+          <End Role="Video" Type="Model.Video" Multiplicity="0..1" />
+          <End Role="MessageAttachment" Type="Model.MessageAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Video">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MessageAttachment">
+              <PropertyRef Name="VideoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_PreviewsGuid_fk">
+          <End Role="PhotoPreviews" Type="Model.PhotoPreviews" Multiplicity="0..1" />
+          <End Role="User" Type="Model.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhotoPreviews">
+              <PropertyRef Name="Guid" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="PreviewsGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PollAnswer_fk">
+          <End Role="Poll" Type="Model.Poll" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PollAnswer" Type="Model.PollAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Poll">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PollAnswer">
+              <PropertyRef Name="PollId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Text" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="Date" Precision="3" />
+          <Property Type="Int64" Name="UserId" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="VkEntities">
+          <EntitySetMapping Name="Album">
+            <EntityTypeMapping TypeName="Model.Album">
+              <MappingFragment StoreEntitySet="Album">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ThumbId" ColumnName="ThumbId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ApplicationContent">
+            <EntityTypeMapping TypeName="Model.ApplicationContent">
+              <MappingFragment StoreEntitySet="ApplicationContent">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Photo130" ColumnName="Photo130" />
+                <ScalarProperty Name="Photo604" ColumnName="Photo604" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Audio">
+            <EntityTypeMapping TypeName="Model.Audio">
+              <MappingFragment StoreEntitySet="Audio">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+                <ScalarProperty Name="Artist" ColumnName="Artist" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="LyricsId" ColumnName="LyricsId" />
+                <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
+                <ScalarProperty Name="GenreId" ColumnName="GenreId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AudioGenre">
+            <EntityTypeMapping TypeName="Model.AudioGenre">
+              <MappingFragment StoreEntitySet="AudioGenre">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Document">
+            <EntityTypeMapping TypeName="Model.Document">
+              <MappingFragment StoreEntitySet="Document">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Ext" ColumnName="Ext" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Photo100" ColumnName="Photo100" />
+                <ScalarProperty Name="Photo130" ColumnName="Photo130" />
+                <ScalarProperty Name="AccessKey" ColumnName="AccessKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Graffiti">
+            <EntityTypeMapping TypeName="Model.Graffiti">
+              <MappingFragment StoreEntitySet="Graffiti">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Photo200" ColumnName="Photo200" />
+                <ScalarProperty Name="Photo586" ColumnName="Photo586" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Link">
+            <EntityTypeMapping TypeName="Model.Link">
+              <MappingFragment StoreEntitySet="Link">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="PreviewPage" ColumnName="PreviewPage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Message">
+            <EntityTypeMapping TypeName="Model.Message">
+              <MappingFragment StoreEntitySet="Message">
+                <ScalarProperty Name="Guid" ColumnName="Guid" />
+                <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ReadStateId" ColumnName="ReadStateId" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="IsContainsEmojiSmiles" ColumnName="IsContainsEmojiSmiles" />
+                <ScalarProperty Name="IsImportant" ColumnName="IsImportant" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="ChatId" ColumnName="ChatId" />
+                <ScalarProperty Name="UsersCount" ColumnName="UsersCount" />
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+                <ScalarProperty Name="PhotoPreviewsId" ColumnName="PhotoPreviewsId" />
+                <ScalarProperty Name="ParentGuid" ColumnName="ParentGuid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MessageAttachment">
+            <EntityTypeMapping TypeName="Model.MessageAttachment">
+              <MappingFragment StoreEntitySet="MessageAttachment">
+                <ScalarProperty Name="MessageGuid" ColumnName="MessageGuid" />
+                <ScalarProperty Name="Guid" ColumnName="Guid" />
+                <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
+                <ScalarProperty Name="VideoId" ColumnName="VideoId" />
+                <ScalarProperty Name="AudioId" ColumnName="AudioId" />
+                <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+                <ScalarProperty Name="GraffitiId" ColumnName="GraffitiId" />
+                <ScalarProperty Name="LinkId" ColumnName="LinkId" />
+                <ScalarProperty Name="NoteId" ColumnName="NoteId" />
+                <ScalarProperty Name="ApplicationContentId" ColumnName="ApplicationContentId" />
+                <ScalarProperty Name="PollId" ColumnName="PollId" />
+                <ScalarProperty Name="PageId" ColumnName="PageId" />
+                <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
+                <ScalarProperty Name="StickerId" ColumnName="StickerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Note">
+            <EntityTypeMapping TypeName="Model.Note">
+              <MappingFragment StoreEntitySet="Note">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="CommentsCount" ColumnName="CommentsCount" />
+                <ScalarProperty Name="ReadCommentsCount" ColumnName="ReadCommentsCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Photo">
+            <EntityTypeMapping TypeName="Model.Photo">
+              <MappingFragment StoreEntitySet="Photo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+                <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
+                <ScalarProperty Name="Photo75" ColumnName="Photo75" />
+                <ScalarProperty Name="Photo130" ColumnName="Photo130" />
+                <ScalarProperty Name="Photo604" ColumnName="Photo604" />
+                <ScalarProperty Name="Photo807" ColumnName="Photo807" />
+                <ScalarProperty Name="Photo1280" ColumnName="Photo1280" />
+                <ScalarProperty Name="Photo2560" ColumnName="Photo2560" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="AccessKey" ColumnName="AccessKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PostId" ColumnName="PostId" />
+                <ScalarProperty Name="PlacerId" ColumnName="PlacerId" />
+                <ScalarProperty Name="TagCreated" ColumnName="TagCreated" />
+                <ScalarProperty Name="TagId" ColumnName="TagId" />
+                <ScalarProperty Name="CanComment" ColumnName="CanComment" />
+                <ScalarProperty Name="PhotoSrc" ColumnName="PhotoSrc" />
+                <ScalarProperty Name="PhotoHash" ColumnName="PhotoHash" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhotoPreviews">
+            <EntityTypeMapping TypeName="Model.PhotoPreviews">
+              <MappingFragment StoreEntitySet="PhotoPreviews">
+                <ScalarProperty Name="Guid" ColumnName="Guid" />
+                <ScalarProperty Name="Photo50" ColumnName="Photo50" />
+                <ScalarProperty Name="Photo100" ColumnName="Photo100" />
+                <ScalarProperty Name="Photo200" ColumnName="Photo200" />
+                <ScalarProperty Name="Photo400" ColumnName="Photo400" />
+                <ScalarProperty Name="PhotoMax" ColumnName="PhotoMax" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Poll">
+            <EntityTypeMapping TypeName="Model.Poll">
+              <MappingFragment StoreEntitySet="Poll">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Votes" ColumnName="Votes" />
+                <ScalarProperty Name="AnswerId" ColumnName="AnswerId" />
+                <ScalarProperty Name="IsAnonymous" ColumnName="IsAnonymous" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PollAnswer">
+            <EntityTypeMapping TypeName="Model.PollAnswer">
+              <MappingFragment StoreEntitySet="PollAnswer">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Votes" ColumnName="Votes" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="PollId" ColumnName="PollId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sticker">
+            <EntityTypeMapping TypeName="Model.Sticker">
+              <MappingFragment StoreEntitySet="Sticker">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Photo64" ColumnName="Photo64" />
+                <ScalarProperty Name="Photo128" ColumnName="Photo128" />
+                <ScalarProperty Name="Photo256" ColumnName="Photo256" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="Model.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="SexId" ColumnName="SexId" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="PhotoPreviewsId" ColumnName="PhotoPreviewsId" />
+                <ScalarProperty Name="IsOnline" ColumnName="IsOnline" />
+                <ScalarProperty Name="Domain" ColumnName="Domain" />
+                <ScalarProperty Name="IsHasMobile" ColumnName="IsHasMobile" />
+                <ScalarProperty Name="ModiblePhone" ColumnName="ModiblePhone" />
+                <ScalarProperty Name="HomePhone" ColumnName="HomePhone" />
+                <ScalarProperty Name="ConnectionsId" ColumnName="ConnectionsId" />
+                <ScalarProperty Name="Site" ColumnName="Site" />
+                <ScalarProperty Name="EducationId" ColumnName="EducationId" />
+                <ScalarProperty Name="IsCanPost" ColumnName="IsCanPost" />
+                <ScalarProperty Name="IsCanSeeAllPosts" ColumnName="IsCanSeeAllPosts" />
+                <ScalarProperty Name="IsCanSeeAudio" ColumnName="IsCanSeeAudio" />
+                <ScalarProperty Name="IsCanWritePrivateMessage" ColumnName="IsCanWritePrivateMessage" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="LastSeen" ColumnName="LastSeen" />
+                <ScalarProperty Name="CommonCount" ColumnName="CommonCount" />
+                <ScalarProperty Name="RelationTypeId" ColumnName="RelationTypeId" />
+                <ScalarProperty Name="BanInfoId" ColumnName="BanInfoId" />
+                <ScalarProperty Name="IsDeactivated" ColumnName="IsDeactivated" />
+                <ScalarProperty Name="DeactiveReason" ColumnName="DeactiveReason" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+                <ScalarProperty Name="Timezone" ColumnName="Timezone" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="IsOnlineMobile" ColumnName="IsOnlineMobile" />
+                <ScalarProperty Name="OnlineApp" ColumnName="OnlineApp" />
+                <ScalarProperty Name="RelationPartnerId" ColumnName="RelationPartnerId" />
+                <ScalarProperty Name="StandInLifeId" ColumnName="StandInLifeId" />
+                <ScalarProperty Name="Interests" ColumnName="Interests" />
+                <ScalarProperty Name="Music" ColumnName="Music" />
+                <ScalarProperty Name="Activities" ColumnName="Activities" />
+                <ScalarProperty Name="Movies" ColumnName="Movies" />
+                <ScalarProperty Name="Tv" ColumnName="Tv" />
+                <ScalarProperty Name="Books" ColumnName="Books" />
+                <ScalarProperty Name="Games" ColumnName="Games" />
+                <ScalarProperty Name="About" ColumnName="About" />
+                <ScalarProperty Name="Quotes" ColumnName="Quotes" />
+                <ScalarProperty Name="InvitedBy" ColumnName="InvitedBy" />
+                <ScalarProperty Name="MaidenName" ColumnName="MaidenName" />
+                <ScalarProperty Name="BirthdayVisibilityId" ColumnName="BirthdayVisibilityId" />
+                <ScalarProperty Name="HomeTown" ColumnName="HomeTown" />
+                <ScalarProperty Name="ChangeNameRequestId" ColumnName="ChangeNameRequestId" />
+                <ScalarProperty Name="PreviewsGuid" ColumnName="PreviewsGuid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Video">
+            <EntityTypeMapping TypeName="Model.Video">
+              <MappingFragment StoreEntitySet="Video">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="Photo130" ColumnName="Photo130" />
+                <ScalarProperty Name="Photo320" ColumnName="Photo320" />
+                <ScalarProperty Name="Photo640" ColumnName="Photo640" />
+                <ScalarProperty Name="CommentsCount" ColumnName="CommentsCount" />
+                <ScalarProperty Name="ViewsCount" ColumnName="ViewsCount" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Player" ColumnName="Player" />
+                <ScalarProperty Name="Repeat" ColumnName="Repeat" />
+                <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
+                <ScalarProperty Name="UploadUrl" ColumnName="UploadUrl" />
+                <ScalarProperty Name="AccessKey" ColumnName="AccessKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="Model.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
