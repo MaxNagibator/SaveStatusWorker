@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Root>
+<Settings>
+  <AppId>4347048</AppId>
+  <email>217@mail.ru</email>
+  <pass>asdasds</pass>
+  <token></token>
+  <userId>0</userId>
+</Settings>
+</Root>
