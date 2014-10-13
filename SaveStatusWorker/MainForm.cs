@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using ClassLibrary2;
 using VkNet;
 using VkNet.Enums.Filters;
+using VkNet.Model;
 
 namespace SaveStatusWorker
 {
@@ -77,33 +80,25 @@ namespace SaveStatusWorker
             vk.Authorize(settings.AppId, settings.Email, settings.Pass, scope);
             var x = ProfileFields.Status | ProfileFields.LastName | ProfileFields.FirstName;
             var frs = vk.Friends.Get((long)vk.UserId, x);
-            using (var context = new DbElements.VkEntities())
+            Class1.SaveStatuses(frs);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            GetValue();
+            //Text += "!";
+            //var settings = GetSettings(XDocument.Load("settings.txt"));
+
+            //var vk = new VkApi();
+            //Settings scope = Settings.All; // Права доступа приложения
+            //vk.Authorize(settings.AppId, settings.Email, settings.Pass, scope);
+            //var x = ProfileFields.Status | ProfileFields.LastName | ProfileFields.FirstName;
+            //var frs = vk.Friends.Get((long)vk.UserId, x);
+            //var x3 = Class1.SaveStatuses(frs);
+            var x3 = Class1.GetStatuses();
+            foreach (var text in x3)
             {
-                DateTime date = DateTime.Now;
-                foreach (var fr in frs)
-                {
-                    var us = context.User.FirstOrDefault(u => u.Id == fr.Id);
-                    if (us == null)
-                    {
-                        context.User.Add(new DbElements.User
-                        {
-                            Id = fr.Id,
-                            LastName = fr.LastName,
-                            FirstName = fr.FirstName
-                        });
-                    }
-                    var lastStatus =
-                        context.Status.Where(s => s.UserId == fr.Id).OrderByDescending(s => s.Date).FirstOrDefault();
-                    if (lastStatus == null || lastStatus.Text != fr.Status)
-                    {
-                        var status = new DbElements.Status();
-                        status.Text = fr.Status;
-                        status.UserId = fr.Id;
-                        status.Date = date;
-                        context.Status.Add(status);
-                    }
-                }
-                context.SaveChanges();
+                textBox2.Text += text + Environment.NewLine;
             }
         }
     }

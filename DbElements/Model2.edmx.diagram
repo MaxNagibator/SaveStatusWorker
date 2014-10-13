@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7e9e52d707344c1bbe8e670babf481a5" Name="Диаграмма1">
+        <EntityTypeShape EntityType="Model1.Album" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.ApplicationContent" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.Audio" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.AudioGenre" Width="1.5" PointX="0.75" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.Document" Width="1.5" PointX="3" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.Graffiti" Width="1.5" PointX="3" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.Link" Width="1.5" PointX="3" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.Message" Width="1.5" PointX="3" PointY="25.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.MessageAttachment" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.Note" Width="1.5" PointX="3" PointY="38.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.Photo" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.PhotoPreviews" Width="1.5" PointX="1.5" PointY="35" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.Poll" Width="1.5" PointX="3" PointY="41.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.PollAnswer" Width="1.5" PointX="5.25" PointY="41.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.Status" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.Sticker" Width="1.5" PointX="3" PointY="44.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.User" Width="1.5" PointX="0.75" PointY="22.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.Video" Width="1.5" PointX="3" PointY="48" IsExpanded="true" />
+        <AssociationConnector Association="Model1.Album_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="Model1.MessageAttachment_AlbumId_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="Model1.MessageAttachment_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="Model1.Audio_GenreId_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="Model1.MessageAttachment_Audio_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="Model1.MessageAttachment_DocumentId_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="Model1.MessageAttachment_GraffityId_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="Model1.MessageAttachment_LinkId_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="Model1.Message_OwnerId_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="Model1.Message_ParentGuid_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="Model1.Message_UserId_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="Model1.MessageAttachment_MessageGuid_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="Model1.MessageAttachment_NoteId_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="Model1.MessageAttachment_PhotoId_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="Model1.MessageAttachment_PollId_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="Model1.MessageAttachment_StickerId_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="Model1.MessageAttachment_Video_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="Model1.User_PreviewsGuid_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="Model1.PollAnswer_fk" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

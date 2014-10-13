@@ -99,9 +99,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DbElements\DbElements.csproj">
-      <Project>{66c4eb5c-dd3f-45af-8183-cc5994cdd713}</Project>
-      <Name>DbElements</Name>
+    <ProjectReference Include="..\ClassLibrary2\DbWorker.csproj">
+      <Project>{c81746b6-e928-4575-b678-e2625f39d960}</Project>
+      <Name>DbWorker</Name>
     </ProjectReference>
     <ProjectReference Include="..\VkNet\VkNet.csproj">
       <Project>{8b031a92-84d4-4418-8551-18f1afeecc6c}</Project>
