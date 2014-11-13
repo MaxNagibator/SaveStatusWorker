@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using VkNet;
@@ -12,6 +14,10 @@ namespace SaveStatusWorker
 {
     public partial class MainForm : Form
     {
+        private int _totalRequest;
+        private int _successRequest;
+        private int _failRequest;
+
         public MainForm()
         {
             InitializeComponent();
@@ -19,8 +25,89 @@ namespace SaveStatusWorker
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            _totalRequest = 0;
+            _successRequest = 0;
+            _failRequest = 0;
         }
 
+        private void uiStartButton_Click(object sender, EventArgs e)
+        {
+            GetStatuses();
+            timer1.Interval = Convert.ToInt32(uiTimerIntervalTextBox.Text)*1000;
+            timer1.Start();
+        }
+
+        private void uiStopButton_Click(object sender, EventArgs e)
+        {
+            uiMessageLabel.Text = "stoped";
+            timer1.Stop();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            GetStatuses();
+        }
+
+        private void GetStatuses()
+        {
+            _totalRequest++;
+            try
+            {
+                var frs = VkWorker.GetFriends();
+                DbStatusWorker.SaveStatuses(frs);
+                _successRequest++;
+            }
+            catch (Exception)
+            {
+                _failRequest++;
+            }
+            uiMessageLabel.Text = "total:" + _totalRequest + " success:" + _successRequest + " fail:" + _failRequest;
+        }
+
+
+        private void uiShowStatusesButton_Click(object sender, EventArgs e)
+        {
+            var statuses = DbStatusWorker.GetStatuses();
+            foreach (var text in statuses)
+            {
+                uiOutTextBox.Text += text + Environment.NewLine;
+            }
+        }
+
+        private void uiGetFriendsButton_Click(object sender, EventArgs e)
+        {
+            var frs = VkWorker.GetFriends();
+            var dict = new List<KeyValuePair<long, string>>();
+            foreach (var fr in frs.OrderBy(f=>f.LastName).ThenBy(f=>f.FirstName))
+            {
+                dict.Add(new KeyValuePair<long, string>(fr.Id, fr.LastName + " " + fr.FirstName));
+            }
+            uiFriendsCombobox.DisplayMember = "Value";
+            uiFriendsCombobox.ValueMember = "Key";
+            uiFriendsCombobox.DataSource = dict;
+        }
+
+        private void uiGetAlbumsButton_Click(object sender, EventArgs e)
+        {
+            long? selectedId = null;
+            if (uiFriendsCombobox.SelectedItem != null)
+            {
+                selectedId = ((User) uiFriendsCombobox.SelectedItem).Id;
+            }
+                var albms = VkWorker.GetAlbums(selectedId);
+            var dict = new List<KeyValuePair<long, string>>();
+            foreach (var album in albms.OrderBy(f => f.Title))
+            {
+                dict.Add(new KeyValuePair<long, string>(album.Id, album.Title + "(" + album.Size+")"));
+            }
+            uiFriendsCombobox.DisplayMember = "Value";
+            uiFriendsCombobox.ValueMember = "Key";
+            uiFriendsCombobox.DataSource = dict; 
+           
+        }
+    }
+    public class VkWorker
+    {
         private static WorkerSettings GetSettings(XDocument xDocument)
         {
             var setting = new WorkerSettings();
@@ -53,57 +140,32 @@ namespace SaveStatusWorker
             return setting;
         }
 
-        private void uiStartButton_Click(object sender, EventArgs e)
+        public static ReadOnlyCollection<User> GetFriends()
         {
-            timer1.Interval = Convert.ToInt32(textBox1.Text);
-            timer1.Start();
-            
-        }
-
-        private void uiStopButton_Click(object sender, EventArgs e)
-        {
-            timer1.Stop();
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            GetValue();
-        }
-
-        private void GetValue()
-        {
-            Text += "!";
-            var settings = GetSettings(XDocument.Load("settings.txt"));
-
-            var vk = new VkApi();
-            Settings scope = Settings.All; // Права доступа приложения
-            vk.Authorize(settings.AppId, settings.Email, settings.Pass, scope);
+            var vk = GetVkApi();
             var x = ProfileFields.Status | ProfileFields.LastName | ProfileFields.FirstName;
             var frs = vk.Friends.Get((long)vk.UserId, x);
-            Class1.SaveStatuses(frs);
+            return frs;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        public static ReadOnlyCollection<PhotoAlbum> GetAlbums(long? userId)
         {
-            GetValue();
-            //Text += "!";
-            //var settings = GetSettings(XDocument.Load("settings.txt"));
+            var vk = GetVkApi();
+            var frs = vk.Photo.GetAlbums(userId);
+            return frs;
+        }
 
-            //var vk = new VkApi();
-            //Settings scope = Settings.All; // Права доступа приложения
-            //vk.Authorize(settings.AppId, settings.Email, settings.Pass, scope);
-            //var x = ProfileFields.Status | ProfileFields.LastName | ProfileFields.FirstName;
-            //var frs = vk.Friends.Get((long)vk.UserId, x);
-            //var x3 = Class1.SaveStatuses(frs);
-            var x3 = Class1.GetStatuses();
-            foreach (var text in x3)
-            {
-                textBox2.Text += text + Environment.NewLine;
-            }
+        private static VkApi GetVkApi()
+        {
+            var settings = GetSettings(XDocument.Load("settings.txt"));
+            var vk = new VkApi();
+            Settings scope = Settings.All;
+            vk.Authorize(settings.AppId, settings.Email, settings.Pass, scope);
+            return vk;
         }
     }
 
-    internal class Class1
+    public class DbStatusWorker
     {
         public static void SaveStatuses(ReadOnlyCollection<User> frs)
         {
@@ -116,11 +178,11 @@ namespace SaveStatusWorker
                     if (us == null)
                     {
                         context.User.Add(new DbElements.User
-                        {
-                            Id = fr.Id,
-                            LastName = fr.LastName,
-                            FirstName = fr.FirstName
-                        });
+                                             {
+                                                 Id = fr.Id,
+                                                 LastName = fr.LastName,
+                                                 FirstName = fr.FirstName
+                                             });
                     }
                     var lastStatus =
                         context.Status.Where(s => s.UserId == fr.Id).OrderByDescending(s => s.Date).FirstOrDefault();
@@ -140,9 +202,11 @@ namespace SaveStatusWorker
         public static List<string> GetStatuses()
         {
             using (var context = new DbElements.Entities1())
-             {
-                 return context.Status.Select(s => s.Text).Take(10).ToList();
-             }
+            {
+                return context.Status
+                    .OrderByDescending(s => s.Date)
+                    .Select(s => s.Text).Take(10).ToList();
+            }
         }
     }
 }
