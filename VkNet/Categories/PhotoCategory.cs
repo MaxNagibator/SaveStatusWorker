@@ -146,7 +146,7 @@ namespace VkNet.Categories
         /// </remarks>
         [ApiMethodName("photos.get", Skip = true)]
         [ApiVersion("5.9")]
-        public ReadOnlyCollection<Photo> Get(long? ownerId = null, long? albumId = null, IEnumerable<long> photoIds = null, bool? rev = null, bool? extended = null, PhotoFeedType feedType = null, DateTime? feed = null, bool? photoSizes = null, int? offset = null, int? count = null)
+        public ReadOnlyCollection<Photo> Get(long? ownerId = null, string albumId = null, IEnumerable<long> photoIds = null, bool? rev = null, bool? extended = null, PhotoFeedType feedType = null, DateTime? feed = null, bool? photoSizes = null, int? offset = null, int? count = null)
         {
             VkErrors.ThrowIfNumberIsNegative(() => offset);
             VkErrors.ThrowIfNumberIsNegative(() => count);

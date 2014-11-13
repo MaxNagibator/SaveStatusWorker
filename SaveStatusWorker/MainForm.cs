@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -62,7 +64,7 @@ namespace SaveStatusWorker
             {
                 _failRequest++;
             }
-            uiMessageLabel.Text = "total:" + _totalRequest + " success:" + _successRequest + " fail:" + _failRequest;
+            Text = "total:" + _totalRequest + " success:" + _successRequest + " fail:" + _failRequest;
         }
 
 
@@ -97,6 +99,10 @@ namespace SaveStatusWorker
             }
             var albms = VkWorker.GetAlbums(selectedUserId);
             var dict = new List<KeyValuePair<string, string>>();
+            dict.Add(new KeyValuePair<string, string>("wall", "фотографии со стены"));
+            dict.Add(new KeyValuePair<string, string>("profile", "фотографии профиля"));
+            dict.Add(new KeyValuePair<string, string>("saved", "сохраненные фотографии"));
+            dict.Add(new KeyValuePair<string, string>("preview", "фотографии из блока над стеной"));
             foreach (var album in albms.OrderBy(f => f.Title))
             {
                 dict.Add(new KeyValuePair<string, string>(album.Id.ToString(), album.Title + "(" + album.Size + ")"));
@@ -111,18 +117,123 @@ namespace SaveStatusWorker
             long? selectedUserId = null;
             if (uiFriendsCombobox.SelectedItem != null)
             {
-                selectedUserId = ((KeyValuePair<long, string>)uiFriendsCombobox.SelectedItem).Key;
+                selectedUserId = ((KeyValuePair<long, string>) uiFriendsCombobox.SelectedItem).Key;
             }
+            if (uiAlbumComboBox.SelectedItem != null)
+            {
+                using (var folderDialog = new FolderBrowserDialog())
+                {
+                    if (folderDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        var albumId = ((KeyValuePair<string, string>)uiAlbumComboBox.SelectedItem).Key;
+                        var photos = VkWorker.GetPhotos(selectedUserId, albumId);
+                        var webClient = new WebClient();
+
+                        var path = folderDialog.SelectedPath;
+                        var userFolderName = GetUserFolderName(selectedUserId, path);
+                        var albumFolderPath = GetAlbumFolderPath(albumId, path, userFolderName);
+                        for (int index = 0; index < photos.Count; index++)
+                        {
+                            var photo = photos[index];
+                            DownloadImage(webClient, photo, albumFolderPath);
+                            Text = "total:" + photos.Count + " current:" + index;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void uiGetAllAlbumPhotosButton_Click(object sender, EventArgs e)
+        {
+            long? selectedUserId = null;
             if (uiFriendsCombobox.SelectedItem != null)
             {
-                var selectedId = ((KeyValuePair<string, string>)uiFriendsCombobox.SelectedItem).Key;
-                var photos = VkWorker.GetPhotos(selectedUserId, selectedId);
+                var x = ((KeyValuePair<long, string>) uiFriendsCombobox.SelectedItem);
+                selectedUserId = x.Key;
+            }
+            if (uiAlbumComboBox.SelectedItem != null)
+            {
+                using (var folderDialog = new FolderBrowserDialog())
+                {
+                    if (folderDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        var path = folderDialog.SelectedPath;
+                        var userFolderName = GetUserFolderName(selectedUserId, path);
+                        for (int i = 0; i < uiAlbumComboBox.Items.Count; i++)
+                        {
+                            var item = uiAlbumComboBox.Items[i];
+                            var albumId = ((KeyValuePair<string, string>) item).Key;
+                            var photos = VkWorker.GetPhotos(selectedUserId, albumId);
+
+                            var albumFolderPath = GetAlbumFolderPath(albumId, path, userFolderName);
+                            var webClient = new WebClient();
+                            for (int index = 0; index < photos.Count; index++)
+                            {
+                                var photo = photos[index];
+                                DownloadImage(webClient, photo, albumFolderPath);
+                                Text = "totalalbum:" + uiAlbumComboBox.Items.Count + " album:" + i +
+                                       " total:" + photos.Count + " current:" + index;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private static string GetUserFolderName(long? selectedUserId, string path)
+        {
+            var userFolderName = "user_" + (selectedUserId ?? VkWorker.GetSetttingsUserId());
+            var userFolderPath = Path.Combine(path, userFolderName);
+            if (!Directory.Exists(userFolderPath))
+            {
+                Directory.CreateDirectory(userFolderPath);
+            }
+            return userFolderName;
+        }
+
+        private static string GetAlbumFolderPath(string albumId, string path, string userFolderName)
+        {
+            var albumFolderName = "album_" + albumId;
+            var albumFolderPath = Path.Combine(path, userFolderName, albumFolderName);
+            if (!Directory.Exists(albumFolderPath))
+            {
+                Directory.CreateDirectory(albumFolderPath);
+            }
+            return albumFolderPath;
+        }
+
+        private void DownloadImage(WebClient webClient, Photo photo, string path)
+        {
+            if (photo.Photo2560 != null)
+            {
+                webClient.DownloadFile(photo.Photo2560, Path.Combine(path, photo.Id + "_2560.jpg"));
+            }
+            else if (photo.Photo1280 != null)
+            {
+                webClient.DownloadFile(photo.Photo1280, Path.Combine(path, photo.Id + "_1280.jpg"));
+            }
+            else if (photo.Photo807 != null)
+            {
+                webClient.DownloadFile(photo.Photo807, Path.Combine(path, photo.Id + "_807.jpg"));
+            }
+            else if (photo.Photo604 != null)
+            {
+                webClient.DownloadFile(photo.Photo604, Path.Combine(path, photo.Id + "_604.jpg"));
+            }
+            else if (photo.Photo130 != null)
+            {
+                webClient.DownloadFile(photo.Photo130, Path.Combine(path, photo.Id + "_130.jpg"));
+            }
+            else if (photo.Photo75 != null)
+            {
+                webClient.DownloadFile(photo.Photo75, Path.Combine(path, photo.Id + "_75.jpg"));
             }
         }
     }
+
     public class VkWorker
     {
-        private static WorkerSettings GetSettings(XDocument xDocument)
+        public static WorkerSettings GetSettings(XDocument xDocument)
         {
             var setting = new WorkerSettings();
             if (xDocument.Root == null)
@@ -172,8 +283,8 @@ namespace SaveStatusWorker
         public static ReadOnlyCollection<Photo> GetPhotos(long? userId, string albumId)
         {
             var vk = GetVkApi();
-            var frs = vk.Photo.Get(userId);//,albumId);
-           return frs;
+            var frs = vk.Photo.Get(userId, albumId);
+            return frs;
         }
 
         private static VkApi GetVkApi()
@@ -183,6 +294,12 @@ namespace SaveStatusWorker
             Settings scope = Settings.All;
             vk.Authorize(settings.AppId, settings.Email, settings.Pass, scope);
             return vk;
+        }
+
+        public static long? GetSetttingsUserId()
+        {
+            var settings = GetSettings(XDocument.Load("settings.txt"));
+            return settings.UserId;
         }
     }
 

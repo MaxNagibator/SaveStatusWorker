@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Root>
 <Settings>
   <AppId>4347048</AppId>
-  <email>217@mail.ru</email>
-  <pass>asdasds</pass>
+  <email>huy@gmail.com</email>
+  <pass>tutparol</pass>
   <token></token>
-  <userId>0</userId>
+  <userId>31951957pomenyayNaSvoy</userId>
 </Settings>
-</Root>

@@ -41,6 +41,8 @@
             this.uiAlbumComboBox = new System.Windows.Forms.ComboBox();
             this.uiGetAlbumsButton = new System.Windows.Forms.Button();
             this.uiGetPhotosButton = new System.Windows.Forms.Button();
+            this.uiGetAllAlbumPhotosButton = new System.Windows.Forms.Button();
+            this.uiPhotoStatusLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // uiTimerIntervalTextBox
@@ -144,17 +146,38 @@
             // 
             this.uiGetPhotosButton.Location = new System.Drawing.Point(365, 67);
             this.uiGetPhotosButton.Name = "uiGetPhotosButton";
-            this.uiGetPhotosButton.Size = new System.Drawing.Size(84, 23);
+            this.uiGetPhotosButton.Size = new System.Drawing.Size(247, 23);
             this.uiGetPhotosButton.TabIndex = 10;
-            this.uiGetPhotosButton.Text = "Get photos";
+            this.uiGetPhotosButton.Text = "get selected album photos";
             this.uiGetPhotosButton.UseVisualStyleBackColor = true;
             this.uiGetPhotosButton.Click += new System.EventHandler(this.uiGetPhotosButton_Click);
+            // 
+            // uiGetAllAlbumPhotosButton
+            // 
+            this.uiGetAllAlbumPhotosButton.Location = new System.Drawing.Point(618, 67);
+            this.uiGetAllAlbumPhotosButton.Name = "uiGetAllAlbumPhotosButton";
+            this.uiGetAllAlbumPhotosButton.Size = new System.Drawing.Size(238, 23);
+            this.uiGetAllAlbumPhotosButton.TabIndex = 11;
+            this.uiGetAllAlbumPhotosButton.Text = "get all album photos";
+            this.uiGetAllAlbumPhotosButton.UseVisualStyleBackColor = true;
+            this.uiGetAllAlbumPhotosButton.Click += new System.EventHandler(this.uiGetAllAlbumPhotosButton_Click);
+            // 
+            // uiPhotoStatusLabel
+            // 
+            this.uiPhotoStatusLabel.AutoSize = true;
+            this.uiPhotoStatusLabel.Location = new System.Drawing.Point(365, 93);
+            this.uiPhotoStatusLabel.Name = "uiPhotoStatusLabel";
+            this.uiPhotoStatusLabel.Size = new System.Drawing.Size(333, 13);
+            this.uiPhotoStatusLabel.TabIndex = 12;
+            this.uiPhotoStatusLabel.Text = "Выбираем пользователя, выбираем альбом или скачиваем все";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(868, 297);
+            this.Controls.Add(this.uiPhotoStatusLabel);
+            this.Controls.Add(this.uiGetAllAlbumPhotosButton);
             this.Controls.Add(this.uiGetPhotosButton);
             this.Controls.Add(this.uiAlbumComboBox);
             this.Controls.Add(this.uiGetAlbumsButton);
@@ -188,6 +211,8 @@
         private System.Windows.Forms.ComboBox uiAlbumComboBox;
         private System.Windows.Forms.Button uiGetAlbumsButton;
         private System.Windows.Forms.Button uiGetPhotosButton;
+        private System.Windows.Forms.Button uiGetAllAlbumPhotosButton;
+        private System.Windows.Forms.Label uiPhotoStatusLabel;
     }
 }
 
