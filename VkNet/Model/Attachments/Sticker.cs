@@ -1,58 +1,39 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using VkNet.Utils;
+﻿using VkNet.Utils;
 
 namespace VkNet.Model.Attachments
 {
-	/// <summary>
-    /// Стикер.
-    /// </summary>
     public class Sticker : MediaAttachment
     {
         static Sticker()
-      	{
+        {
             RegisterType(typeof(Sticker), "sticker");
-      	}
+        }
 
-        /// <summary>
-        /// Url фотографии с максимальным размером 64x64px.
-        /// </summary>
-        public Uri Photo64 { get; set; }
+        public long? ProductId { get; set; }
 
-        /// <summary>
-        /// Url фотографии с максимальным размером 128x128px. 
-        /// </summary>
-        public Uri Photo128 { get; set; }
+        public string Photo64 { get; set; }
 
-        /// <summary>
-        /// Url фотографии с максимальным размером  256x256px.
-        /// </summary>
-        public Uri Photo256 { get; set; }
+        public string Photo128 { get; set; }
 
-        /// <summary>
-        /// Ширина оригинала фотографии в пикселах
-        /// </summary>
-        public int? Width { get; set; }
+        public string Photo256 { get; set; }
 
-        /// <summary>
-        /// Высота оригинала фотографии в пикселах. 
-        /// </summary>
-        public int? Height { get; set; }
+        public long? Width { get; set; }
 
-        #region Методы
+        public long? Height { get; set; }
 
         internal static Sticker FromJson(VkResponse response)
         {
-            var poll = new Sticker();
-            poll.Id = response["id"];
-            poll.Photo64 = response["photo_64"];
-            poll.Photo128 = response["photo_128"];
-            poll.Photo256 = response["photo_256"];
-            poll.Width = response["width"];
-            poll.Height = response["height"];
-            return poll;
-        }
+            var sticker = new Sticker();
 
-        #endregion
+            sticker.Id = response["id"];
+            sticker.ProductId = response["product_id"];
+            sticker.Photo64 = response["photo_64"];
+            sticker.Photo128 = response["photo_128"];
+            sticker.Photo256 = response["photo_256"];
+            sticker.Width = response["width"];
+            sticker.Height = response["height"];
+
+            return sticker;
+        }
     }
 }

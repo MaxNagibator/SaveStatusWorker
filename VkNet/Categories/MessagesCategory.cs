@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-using System.Reflection;
-using VkNet.Enums.Filters;
+﻿using VkNet.Enums.Filters;
 using VkNet.Model.Attachments;
 
 namespace VkNet.Categories
@@ -57,7 +55,7 @@ namespace VkNet.Categories
         /// Страница документации ВКонтакте <see href="http://vk.com/dev/messages.get"/>.
         /// </remarks>
         [Pure]
-        [ApiVersion("5.21")]
+		[ApiVersion("5.21")]
         public ReadOnlyCollection<Message> Get(
             MessageType type,
             out int totalCount,
@@ -70,12 +68,12 @@ namespace VkNet.Categories
         {
             VkErrors.ThrowIfNumberIsNegative(() => count);
             VkErrors.ThrowIfNumberIsNegative(() => offset);
-            VkErrors.ThrowIfNumberIsNegative(() => previewLength);
-            VkErrors.ThrowIfNumberIsNegative(() => lastMessageId);
+			VkErrors.ThrowIfNumberIsNegative(() => previewLength);
+			VkErrors.ThrowIfNumberIsNegative(() => lastMessageId);
 
             var parameters = new VkParameters
                              {
-                                  { "out", type },
+                                 { "out", type },
                                  { "offset", offset },
                                  { "count", count },
                                  { "time_offset", timeOffset},
@@ -83,6 +81,7 @@ namespace VkNet.Categories
                                  { "preview_length", previewLength },
                                  { "last_message_id", lastMessageId }
                              };
+
             VkResponse response = _vk.Call("messages.get", parameters);
             totalCount = response["count"];
 
@@ -134,11 +133,12 @@ namespace VkNet.Categories
                                  { "rev", inReverse }
                              };
 
-            VkResponseArray response = _vk.Call("messages.getHistory", parameters);
+            VkResponse response = _vk.Call("messages.getHistory", parameters);
 
-            totalCount = response[0];
+            totalCount = response["count"];
+            VkResponseArray items = response["items"];
 
-            return response.Skip(1).ToReadOnlyCollectionOf<Message>(r => r);
+            return items.ToReadOnlyCollectionOf<Message>(r => r);
         }
 
         /// <summary>
@@ -154,11 +154,11 @@ namespace VkNet.Categories
         /// Страница документации ВКонтакте <see href="http://vk.com/dev/messages.getById"/>.
         /// </remarks>
         [Pure]
-        [ApiVersion("5.21")]
+		[ApiVersion("5.21")]
         public ReadOnlyCollection<Message> GetById(IEnumerable<long> messageIds, out int totalCount, int? previewLength = null)
         {
             VkErrors.ThrowIfNumberIsNegative(() => previewLength);
-            var parameters = new VkParameters { { "message_ids", messageIds }, { "preview_length", previewLength } };
+			var parameters = new VkParameters { { "message_ids", messageIds }, { "preview_length", previewLength } };
 
             VkResponseArray response = _vk.Call("messages.getById", parameters);
 
@@ -179,14 +179,14 @@ namespace VkNet.Categories
         /// Страница документации ВКонтакте <see href="http://vk.com/dev/messages.getById"/>.
         /// </remarks>
         [Pure]
-        [ApiVersion("5.21")]
+		[ApiVersion("5.21")]
         public Message GetById(long messageId, int? previewLength = null)
         {
-            VkErrors.ThrowIfNumberIsNegative(() => messageId);
+			VkErrors.ThrowIfNumberIsNegative(() => messageId);
             VkErrors.ThrowIfNumberIsNegative(() => previewLength);
-            
-            int totalCount;
-            return GetById(new[] { messageId }, out totalCount, previewLength).FirstOrDefault();
+			
+			int totalCount;
+			return GetById(new[] { messageId }, out totalCount, previewLength).FirstOrDefault();
         }
 
         /// <summary>
@@ -205,7 +205,7 @@ namespace VkNet.Categories
         /// Страница документации ВКонтакте <see href="http://vk.com/dev/messages.getDialogs"/>.
         /// </remarks>
         [Pure]
-        public ReadOnlyCollection<Message> GetDialogs(long userId, out int totalCount, long? chatId = null, int? count = null, int? offset = null, int? previewLength = null)
+		public ReadOnlyCollection<Message> GetDialogs(long userId, out int totalCount, long? chatId = null, int? count = null, int? offset = null, int? previewLength = null)
         {
             var parameters = new VkParameters { { "uid", userId }, { "chat_id", chatId }, { "count", count }, { "offset", offset }, { "preview_length", previewLength } };
 

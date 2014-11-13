@@ -40,6 +40,7 @@
             this.uiFriendsCombobox = new System.Windows.Forms.ComboBox();
             this.uiAlbumComboBox = new System.Windows.Forms.ComboBox();
             this.uiGetAlbumsButton = new System.Windows.Forms.Button();
+            this.uiGetPhotosButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // uiTimerIntervalTextBox
@@ -139,11 +140,22 @@
             this.uiGetAlbumsButton.UseVisualStyleBackColor = true;
             this.uiGetAlbumsButton.Click += new System.EventHandler(this.uiGetAlbumsButton_Click);
             // 
+            // uiGetPhotosButton
+            // 
+            this.uiGetPhotosButton.Location = new System.Drawing.Point(365, 67);
+            this.uiGetPhotosButton.Name = "uiGetPhotosButton";
+            this.uiGetPhotosButton.Size = new System.Drawing.Size(84, 23);
+            this.uiGetPhotosButton.TabIndex = 10;
+            this.uiGetPhotosButton.Text = "Get photos";
+            this.uiGetPhotosButton.UseVisualStyleBackColor = true;
+            this.uiGetPhotosButton.Click += new System.EventHandler(this.uiGetPhotosButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(868, 297);
+            this.Controls.Add(this.uiGetPhotosButton);
             this.Controls.Add(this.uiAlbumComboBox);
             this.Controls.Add(this.uiGetAlbumsButton);
             this.Controls.Add(this.uiFriendsCombobox);
@@ -175,6 +187,7 @@
         private System.Windows.Forms.ComboBox uiFriendsCombobox;
         private System.Windows.Forms.ComboBox uiAlbumComboBox;
         private System.Windows.Forms.Button uiGetAlbumsButton;
+        private System.Windows.Forms.Button uiGetPhotosButton;
     }
 }
 

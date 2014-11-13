@@ -284,33 +284,33 @@
 
         #endregion
 
-        #region Поля, доступные через запрос https://vk.com/dev/account.getProfileInfo
+		#region Поля, доступные через запрос https://vk.com/dev/account.getProfileInfo
 
-        /// <summary>
-        /// Девичья фамилия (только для женского пола)
-        /// </summary>
-        public string MaidenName { get; set; }
+		/// <summary>
+		/// Девичья фамилия (только для женского пола)
+		/// </summary>
+	    public string MaidenName { get; set; }
 
-        /// <summary>
-        /// Видимость даты рождения.
-        /// </summary>
-        public BirthdayVisibility BirthdayVisibility { get; set; }
+		/// <summary>
+		/// Видимость даты рождения.
+		/// </summary>
+		public BirthdayVisibility BirthdayVisibility { get; set; }
 
-        /// <summary>
-        /// Родной город пользователя.
-        /// </summary>
-        public string HomeTown { get; set; }
+		/// <summary>
+		/// Родной город пользователя.
+		/// </summary>
+		public string HomeTown { get; set; }
 
-        /// <summary>
-        /// Информация о заявке на смену имени.
-        /// </summary>
-        public ChangeNameRequest ChangeNameRequest { get; set; }
+		/// <summary>
+		/// Информация о заявке на смену имени.
+		/// </summary>
+		public ChangeNameRequest ChangeNameRequest { get; set; }
 
-        #endregion
+		#endregion
 
-        #region Методы
+		#region Методы
 
-        internal static User FromJson(VkResponse response)
+		internal static User FromJson(VkResponse response)
         {
             var user = new User();
 
@@ -387,11 +387,11 @@
             user.DeactiveReason = response["deactivated"];
             user.IsDeactivated = !string.IsNullOrEmpty(user.DeactiveReason);
 
-            //Поля, доступные через запрос https://vk.com/dev/account.getProfileInfo
-            user.MaidenName = response["maiden_name"];
-            user.BirthdayVisibility = (BirthdayVisibility)(response["bdate_visibility"] ?? 0);
-            user.HomeTown = response["home_town"];
-            user.ChangeNameRequest = response["name_request"];
+			//Поля, доступные через запрос https://vk.com/dev/account.getProfileInfo
+			user.MaidenName = response["maiden_name"];
+			user.BirthdayVisibility = (BirthdayVisibility)(response["bdate_visibility"] ?? 0);
+			user.HomeTown = response["home_town"];
+			user.ChangeNameRequest = response["name_request"];
 
             return user;
         }

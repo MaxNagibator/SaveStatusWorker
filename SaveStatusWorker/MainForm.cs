@@ -9,6 +9,7 @@ using System.Xml.Linq;
 using VkNet;
 using VkNet.Enums.Filters;
 using VkNet.Model;
+using VkNet.Model.Attachments;
 
 namespace SaveStatusWorker
 {
@@ -33,7 +34,7 @@ namespace SaveStatusWorker
         private void uiStartButton_Click(object sender, EventArgs e)
         {
             GetStatuses();
-            timer1.Interval = Convert.ToInt32(uiTimerIntervalTextBox.Text)*1000;
+            timer1.Interval = Convert.ToInt32(uiTimerIntervalTextBox.Text) * 1000;
             timer1.Start();
         }
 
@@ -78,7 +79,7 @@ namespace SaveStatusWorker
         {
             var frs = VkWorker.GetFriends();
             var dict = new List<KeyValuePair<long, string>>();
-            foreach (var fr in frs.OrderBy(f=>f.LastName).ThenBy(f=>f.FirstName))
+            foreach (var fr in frs.OrderBy(f => f.LastName).ThenBy(f => f.FirstName))
             {
                 dict.Add(new KeyValuePair<long, string>(fr.Id, fr.LastName + " " + fr.FirstName));
             }
@@ -89,21 +90,34 @@ namespace SaveStatusWorker
 
         private void uiGetAlbumsButton_Click(object sender, EventArgs e)
         {
-            long? selectedId = null;
+            long? selectedUserId = null;
             if (uiFriendsCombobox.SelectedItem != null)
             {
-                selectedId = ((User) uiFriendsCombobox.SelectedItem).Id;
+                selectedUserId = ((KeyValuePair<long, string>)uiFriendsCombobox.SelectedItem).Key;
             }
-                var albms = VkWorker.GetAlbums(selectedId);
-            var dict = new List<KeyValuePair<long, string>>();
+            var albms = VkWorker.GetAlbums(selectedUserId);
+            var dict = new List<KeyValuePair<string, string>>();
             foreach (var album in albms.OrderBy(f => f.Title))
             {
-                dict.Add(new KeyValuePair<long, string>(album.Id, album.Title + "(" + album.Size+")"));
+                dict.Add(new KeyValuePair<string, string>(album.Id.ToString(), album.Title + "(" + album.Size + ")"));
             }
-            uiFriendsCombobox.DisplayMember = "Value";
-            uiFriendsCombobox.ValueMember = "Key";
-            uiFriendsCombobox.DataSource = dict; 
-           
+            uiAlbumComboBox.DisplayMember = "Value";
+            uiAlbumComboBox.ValueMember = "Key";
+            uiAlbumComboBox.DataSource = dict;
+        }
+
+        private void uiGetPhotosButton_Click(object sender, EventArgs e)
+        {
+            long? selectedUserId = null;
+            if (uiFriendsCombobox.SelectedItem != null)
+            {
+                selectedUserId = ((KeyValuePair<long, string>)uiFriendsCombobox.SelectedItem).Key;
+            }
+            if (uiFriendsCombobox.SelectedItem != null)
+            {
+                var selectedId = ((KeyValuePair<string, string>)uiFriendsCombobox.SelectedItem).Key;
+                var photos = VkWorker.GetPhotos(selectedUserId, selectedId);
+            }
         }
     }
     public class VkWorker
@@ -153,6 +167,13 @@ namespace SaveStatusWorker
             var vk = GetVkApi();
             var frs = vk.Photo.GetAlbums(userId);
             return frs;
+        }
+
+        public static ReadOnlyCollection<Photo> GetPhotos(long? userId, string albumId)
+        {
+            var vk = GetVkApi();
+            var frs = vk.Photo.Get(userId);//,albumId);
+           return frs;
         }
 
         private static VkApi GetVkApi()

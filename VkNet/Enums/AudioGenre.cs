@@ -43,6 +43,10 @@
         /// </summary>
         Metal = 7,
 
+        /// <summary>
+        /// Альтернативная музыка.
+        /// </summary>
+        Alternative = 21,
 
         /// <summary>
         /// Дабстеп.
@@ -93,11 +97,6 @@
         /// Инди-поп.
         /// </summary>
         IndiePop = 17,
-        
-        /// <summary>
-        /// Другая музыка.
-        /// </summary>
-        Other = 18,
 
         /// <summary>
         /// Спич.
@@ -105,14 +104,13 @@
         Speech = 19,
 
         /// <summary>
-        /// Альтернативная музыка.
-        /// </summary>
-        Alternative = 21,
-
-        /// <summary>
         /// Электро-поп и диско.
         /// </summary>
         ElectropopAndDisco = 22,
 
+        /// <summary>
+        /// Другая музыка.
+        /// </summary>
+        Other = 18
     }
 }

@@ -111,7 +111,7 @@ namespace VkNet.Categories
                     {"count", count},
                     {"need_system", needSystem},
                     {"need_covers", needCovers},
-                    {"photo_sizes", photoSizes}
+                    {"photo_sizes", photoSizes},
                 };
 
             VkResponseArray response = _vk.Call("photos.getAlbums", parameters);
@@ -379,7 +379,7 @@ namespace VkNet.Categories
         /// </remarks>
         [ApiMethodName("photos.saveWallPhoto", Skip = true)]
         [ApiVersion("5.9")]
-        public Photo SaveWallPhoto(string photo, long? userId = null, long? groupId = null, long? server = null, string hash = null)
+        public ReadOnlyCollection<Photo> SaveWallPhoto(string photo, long? userId = null, long? groupId = null, long? server = null, string hash = null)
         {
             VkErrors.ThrowIfNumberIsNegative(() => userId);
             VkErrors.ThrowIfNumberIsNegative(() => groupId);
@@ -393,9 +393,8 @@ namespace VkNet.Categories
                     {"hash", hash}
                 };
 
-            VkResponse response = _vk.Call("photos.saveWallPhoto", parameters);
-
-            return response;
+            VkResponseArray response = _vk.Call("photos.saveWallPhoto", parameters);
+            return response.ToReadOnlyCollectionOf<Photo>(x => x);
         }
 
         /// <summary>
@@ -530,13 +529,16 @@ namespace VkNet.Categories
         /// Страница документации ВКонтакте <see href="http://vk.com/dev/photos.search"/>.
         /// </remarks>
         [ApiVersion("5.9")]
-        public ReadOnlyCollection<Photo> Search(string query, double? lat = null, double? longitude = null, DateTime? startTime = null, DateTime? endTime = null, bool? sort = null, int? count = null, int? offset = null, int? radius = null)
+        public ReadOnlyCollection<Photo> Search(string query = null, double? lat = null, double? longitude = null, DateTime? startTime = null, DateTime? endTime = null, bool? sort = null, int? count = null, int? offset = null, int? radius = null)
         {
             // todo add check for latitude and longitude throught VkErrors.ThrowIfNumberNotInRange
             // TODO add verstion with totalCount
             VkErrors.ThrowIfNumberIsNegative(() => offset);
             VkErrors.ThrowIfNumberIsNegative(() => count);
             VkErrors.ThrowIfNumberIsNegative(() => radius);
+
+            //TODO do this check later
+//            VkErrors.ThrowIfNumberNotInRange(lat, -90, 90);
 
             var parameters = new VkParameters
                 {
@@ -551,7 +553,7 @@ namespace VkNet.Categories
                     {"radius", radius}
                 };
 
-            VkResponseArray response = _vk.Call("photos.search", parameters);
+            VkResponseArray response = _vk.Call("photos.search", parameters, true);
 
             return response.ToReadOnlyCollectionOf<Photo>(x => x);
         }

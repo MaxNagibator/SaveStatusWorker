@@ -2,18 +2,18 @@
 
 namespace VkNet.Model.Attachments
 {
-    /// <summary>
+	/// <summary>
     /// Информация о документе.
     /// См. описание <see href="http://vk.com/dev/doc"/>.
     /// </summary>
     public class Document : MediaAttachment
     {
-        static Document()
-        {
-            RegisterType(typeof (Document), "doc");
-        }
+		static Document()
+		{
+			RegisterType(typeof (Document), "doc");
+		}
 
-        /// <summary>
+		/// <summary>
         /// Название документа.
         /// </summary>
         public string Title { get; set; }

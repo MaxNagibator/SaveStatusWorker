@@ -89,7 +89,7 @@ namespace VkNet.Model
             album.Privacy = Utilities.GetNullableLongId(response["privacy"]);
             album.CommentPrivacy = Utilities.GetNullableLongId(response["comment_privacy"]);
             album.CanUpload = response["can_upload"];
-            album.PrivacyView = response["privacy_view"];
+           // album.PrivacyView = response["privacy_view"];
             album.ThumbSrc = response["thumb_src"];
 
             return album;

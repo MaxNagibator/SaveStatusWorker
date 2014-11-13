@@ -4,74 +4,76 @@ using VkNet.Utils;
 
 namespace VkNet.Model.Attachments
 {
-    /// <summary>
+	/// <summary>
     /// Информация о медиавложении в записи.
     /// См. описание <see href="http://vk.com/dev/attachments_w"/>. 
     /// </summary>
     public class Attachment
     {
+        #region Поля
 
         /// <summary>
         /// Фотография из альбома или фотография, загруженная напрямую с компьютера пользователя.
         /// </summary>
-        public Photo Photo { get; set; }
+        private Photo Photo { get; set; }
 
         /// <summary>
         /// Видеозапись.
         /// </summary>
-        public Video Video { get; set; }
+        private Video Video { get; set; }
 
         /// <summary>
         /// Аудиозапись.
         /// </summary>
-        public Audio Audio { get; set; }
+        private Audio Audio { get; set; }
 
         /// <summary>
         /// Документ.
         /// </summary>
-        public Document Document { get; set; }
+        private Document Document { get; set; }
 
         /// <summary>
         /// Документ.
         /// </summary>
-        public Graffiti Graffiti { get; set; }
+        private Graffiti Graffiti { get; set; }
 
         /// <summary>
         /// Ссылка на Web-страницу.
         /// </summary>
-        public Link Link { get; set; }
+        private Link Link { get; set; }
 
         /// <summary>
         /// Заметка.
         /// </summary>
-        public Note Note { get; set; }
+        private Note Note { get; set; }
 
         /// <summary>
         /// Контент приложения.
         /// </summary>
-        public ApplicationContent ApplicationContent { get; set; }
+        private ApplicationContent ApplicationContent { get; set; }
 
         /// <summary>
         /// Опрос.
         /// </summary>
-        public Poll Poll { get; set; }
+        private Poll Poll { get; set; }
 
         /// <summary>
         /// Wiki страница.
         /// </summary>
-        public Page Page { get; set; }
+        private Page Page { get; set; }
 
         /// <summary>
         /// Альбом с фотографиями.
         /// </summary>
-        public Album Album { get; set; }
+        private Album Album { get; set; }
 
-        /// <summary>
-        /// Стикер
-        /// </summary>
-        public Sticker Sticker { get; set; }
+	    private PhotosList PhotosList;
 
-        public PhotosList PhotosList;
+        private Wall Wall { get; set; }
+
+        private Sticker Sticker { get; set; }
+
+        #endregion
 
         /// <summary>
         /// Экземпляр самого прикрепления.
@@ -104,7 +106,9 @@ namespace VkNet.Model.Attachments
                     return Album;
                 if (Type == typeof (PhotosList))
                     return PhotosList;
-                if (Type == typeof(Sticker))
+                if (Type == typeof (Wall))
+                    return Wall;
+                if (Type == typeof (Sticker))
                     return Sticker;
 
                 return null;
@@ -187,16 +191,16 @@ namespace VkNet.Model.Attachments
                     attachment.PhotosList = response["photos_list"];
                     break;
 
+                case "wall":
+                    attachment.Type = typeof (Wall);
+                    attachment.Wall = response["wall"];
+                    break;
+
                 case "sticker":
-                    attachment.Type = typeof(Sticker);
+                    attachment.Type = typeof (Sticker);
                     attachment.Sticker = response["sticker"];
                     break;
-                case "wall":
-                    break; //todo make me
-                case "gift":
-                    break; //todo make me
-                case "wall_reply":
-                    break; //todo make me
+
                 default:
                     throw new InvalidParameterException(string.Format("The type '{0}' of attachment is not defined.", type));
             }

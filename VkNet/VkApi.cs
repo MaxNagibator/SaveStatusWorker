@@ -4,7 +4,6 @@ namespace VkNet
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Threading.Tasks;
     using JetBrains.Annotations;
 
     using System.Collections.Generic;
@@ -73,10 +72,10 @@ namespace VkNet
         /// API для работы с видеофайлами.
         /// </summary>
         public VideoCategory Video { get; private set; }
-        /// <summary>
-        /// API для работы с аккаунтом пользователя.
-        /// </summary>
-        public AccountCategory Account { get; private set; }
+		/// <summary>
+		/// API для работы с аккаунтом пользователя.
+		/// </summary>
+		public AccountCategory Account { get; private set; }
         /// <summary>
         /// API для работы с фотографиями
         /// </summary>
@@ -86,14 +85,17 @@ namespace VkNet
 
         internal IBrowser Browser { get; set; }
 
-        internal string AccessToken { get; set; }
+        /// <summary>
+        /// Токен для доступа к методам API
+        /// </summary>
+        public string AccessToken { get; set; }
 
         /// <summary>
         /// Идентификатор пользователя, от имени которого была проведена авторизация.
         /// Если авторизация не была произведена с использованием метода <see cref="Authorize(int,string,string,Settings)"/>, 
         /// то возвращается null.
         /// </summary>
-        public long ?UserId { get; set; }
+        public long? UserId { get; set; }
 
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="VkApi"/>.
@@ -113,7 +115,7 @@ namespace VkNet
             Utils = new UtilsCategory(this);
             Fave = new FaveCategory(this);
             Video = new VideoCategory(this);
-            Account = new AccountCategory(this);
+			Account = new AccountCategory(this);
             Photo = new PhotoCategory(this);
         }
 
@@ -147,7 +149,7 @@ namespace VkNet
 
         #region Private & Internal Methods
 
-#if DEBUG
+#if false
         // todo refactor this shit
         internal async Task<VkResponse> CallAsync(string methodName, VkParameters parameters, bool skipAuthorization = false)
         {
@@ -172,9 +174,9 @@ namespace VkNet
         }
 #endif
         
-        [MethodImpl(MethodImplOptions.NoInlining)]
-        internal VkResponse Call(string methodName, VkParameters parameters, bool skipAuthorization = false, string apiVersion = null)
-        {
+		[MethodImpl(MethodImplOptions.NoInlining)]
+	    internal VkResponse Call(string methodName, VkParameters parameters, bool skipAuthorization = false, string apiVersion = null)
+	    {
             var stackTrace = new StackTrace();
             MethodBase methodBase = stackTrace.GetFrame(1).GetMethod();
             var attributes = methodBase.GetCustomAttributes(typeof(ApiVersionAttribute), true);
@@ -183,26 +185,26 @@ namespace VkNet
                 var version = ((ApiVersionAttribute)attributes[0]).Version;
                 parameters.Add("v", version);
             }
-            if (!parameters.ContainsKey("v"))
-            {
-                if (!string.IsNullOrEmpty(apiVersion))
-                    parameters.Add("v", apiVersion);
-                else
-                {
-                    //TODO: WARN: раскомментировать после добавления аннотаций ко всем методам
-                    //throw new InvalidParameterException("You must use ApiVersionAttribute except adding \"v\" parameter to VkParameters");
-                }
-            }
-            else
-            {
-                //TODO: WARN: раскомментировать, исправив ошибки в существующем коде
-                //throw new InvalidParameterException("You must use ApiVersionAttribute except adding \"v\" parameter to VkParameters");
-            }
+		    if (!parameters.ContainsKey("v"))
+		    {
+			    if (!string.IsNullOrEmpty(apiVersion))
+					parameters.Add("v", apiVersion);
+				else
+				{
+					//TODO: WARN: раскомментировать после добавления аннотаций ко всем методам
+					//throw new InvalidParameterException("You must use ApiVersionAttribute except adding \"v\" parameter to VkParameters");
+				}
+		    }
+		    else
+		    {
+				//TODO: WARN: раскомментировать, исправив ошибки в существующем коде
+				//throw new InvalidParameterException("You must use ApiVersionAttribute except adding \"v\" parameter to VkParameters");
+		    }
 
-            return Call(methodName, parameters, skipAuthorization);
-        }
+			return Call(methodName, parameters, skipAuthorization);
+	    }
 
-        private VkResponse Call(string methodName, VkParameters parameters,  bool skipAuthorization = false)
+	    private VkResponse Call(string methodName, VkParameters parameters,  bool skipAuthorization = false)
         {
             string answer = Invoke(methodName, parameters, skipAuthorization);
 

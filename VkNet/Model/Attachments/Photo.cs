@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using VkNet.Utils;
-
-namespace VkNet.Model.Attachments
+﻿namespace VkNet.Model.Attachments
 {
+    using System;
+
+    using Utils;
+
 	/// <summary>
     /// Фотография.
     /// </summary>
@@ -125,6 +125,16 @@ namespace VkNet.Model.Attachments
         public Uri PhotoSrc { get; set; }
         public Uri PhotoHash { get; set; }
 
+	    /// <summary>
+	    /// Географическая широта отметки, заданная в градусах
+	    /// </summary>
+	    public double? Latitude;
+
+        /// <summary>
+        /// Географическая долгота отметки, заданная в градусах
+        /// </summary>
+	    public double? Longitude;
+
         #region Методы
 
         internal static Photo FromJson(VkResponse response)
@@ -162,6 +172,9 @@ namespace VkNet.Model.Attachments
 
             photo.PhotoSrc = response["photo_src"];
             photo.PhotoHash = response["photo_hash"];
+
+            photo.Latitude = response["lat"];
+            photo.Longitude = response["long"];
 
             return photo;
         }
