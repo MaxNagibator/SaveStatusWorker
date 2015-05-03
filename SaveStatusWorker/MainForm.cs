@@ -9,6 +9,7 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using VkNet;
+using VkNet.Enums;
 using VkNet.Enums.Filters;
 using VkNet.Model;
 using VkNet.Model.Attachments;
@@ -20,6 +21,7 @@ namespace SaveStatusWorker
         private int _totalRequest;
         private int _successRequest;
         private int _failRequest;
+        private List<Post> _gettingWallPosts;
 
         public MainForm()
         {
@@ -36,7 +38,7 @@ namespace SaveStatusWorker
         private void uiStartButton_Click(object sender, EventArgs e)
         {
             GetStatuses();
-            timer1.Interval = Convert.ToInt32(uiTimerIntervalTextBox.Text) * 1000;
+            timer1.Interval = Convert.ToInt32(uiTimerIntervalTextBox.Text)*1000;
             timer1.Start();
         }
 
@@ -95,7 +97,7 @@ namespace SaveStatusWorker
             long? selectedUserId = null;
             if (uiFriendsCombobox.SelectedItem != null)
             {
-                selectedUserId = ((KeyValuePair<long, string>)uiFriendsCombobox.SelectedItem).Key;
+                selectedUserId = ((KeyValuePair<long, string>) uiFriendsCombobox.SelectedItem).Key;
             }
             var albms = VkWorker.GetAlbums(selectedUserId);
             var dict = new List<KeyValuePair<string, string>>();
@@ -125,7 +127,7 @@ namespace SaveStatusWorker
                 {
                     if (folderDialog.ShowDialog() == DialogResult.OK)
                     {
-                        var albumId = ((KeyValuePair<string, string>)uiAlbumComboBox.SelectedItem).Key;
+                        var albumId = ((KeyValuePair<string, string>) uiAlbumComboBox.SelectedItem).Key;
                         var photos = VkWorker.GetPhotos(selectedUserId, albumId);
                         var webClient = new WebClient();
 
@@ -229,10 +231,63 @@ namespace SaveStatusWorker
                 webClient.DownloadFile(photo.Photo75, Path.Combine(path, photo.Id + "_75.jpg"));
             }
         }
+
+        private void uiGetGroupContentButton_Click(object sender, EventArgs e)
+        {
+            var ownerId = Convert.ToInt32(uiFromOwnerIdTextBox.Text);
+            var wallPosts = VkWorker.WallGet(ownerId, 10);
+            _gettingWallPosts = wallPosts.ToList();
+            ConsoleWriteLine("get post count = " + _gettingWallPosts.Count);
+        }
+
+        private void ConsoleWriteLine(string text)
+        {
+            uiOutTextBox.Text += text + Environment.NewLine;
+        }
+
+        private void uiPastGroupContentButton_Click(object sender, EventArgs e)
+        {
+            foreach (var wallPost in _gettingWallPosts)
+            {
+
+                var ownerId = Convert.ToInt32(uiToOwnerIdTextBox.Text);
+                var mediaAtachments = new List<MediaAttachment>();
+                foreach (var a in wallPost.Attachments)
+                {
+                    mediaAtachments.Add((MediaAttachment) a.Instance);
+                }
+                var postId = VkWorker.WallPost(ownerId, wallPost.Text, mediaAtachments);
+                ConsoleWriteLine(wallPost.OwnerId + "_" + wallPost.Id + "-> " + postId);
+            }
+        }
+
+        private void MainForm_Resize(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                Hide();
+            }
+        }
+
+        private void uiNotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                Show();
+                WindowState = FormWindowState.Normal;
+            }
+            else
+            {
+                Hide();
+                WindowState = FormWindowState.Minimized;
+            }
+        }
     }
 
     public class VkWorker
     {
+        private static VkApi _vk;
+
         public static WorkerSettings GetSettings(XDocument xDocument)
         {
             var setting = new WorkerSettings();
@@ -265,6 +320,29 @@ namespace SaveStatusWorker
             return setting;
         }
 
+        public static long WallGetCount(int ownerId)
+        {
+            var vk = GetVkApi();
+            int totalCount;
+            var frs = vk.Wall.Get(ownerId, out totalCount, 1);
+            return totalCount;
+        }
+
+        public static ReadOnlyCollection<Post> WallGet(int ownerId, int count = 100, int offset = 0, WallFilter filter = WallFilter.All)
+        {
+            var vk = GetVkApi();
+            int totalCount;
+            var frs = vk.Wall.Get(ownerId,out totalCount,count,offset, filter);
+            return frs;
+        }
+
+        public static long WallPost(int ownerId, string message,List<MediaAttachment> attachments)
+        {
+            var vk = GetVkApi();
+            var frs = vk.Wall.Post(ownerId, message: message, mediaAttachments: attachments);
+            return frs;
+        }
+
         public static ReadOnlyCollection<User> GetFriends()
         {
             var vk = GetVkApi();
@@ -289,10 +367,16 @@ namespace SaveStatusWorker
 
         private static VkApi GetVkApi()
         {
+            if (_vk != null)
+            {
+                return _vk;
+            }
+
             var settings = GetSettings(XDocument.Load("settings.txt"));
             var vk = new VkApi();
             Settings scope = Settings.All;
             vk.Authorize(settings.AppId, settings.Email, settings.Pass, scope);
+            _vk = vk;
             return vk;
         }
 
@@ -307,7 +391,7 @@ namespace SaveStatusWorker
     {
         public static void SaveStatuses(ReadOnlyCollection<User> frs)
         {
-            using (var context = new DbElements.Entities1())
+            using (var context = new DbElements.VkEntities())
             {
                 DateTime date = DateTime.Now;
                 foreach (var fr in frs)
@@ -339,12 +423,13 @@ namespace SaveStatusWorker
 
         public static List<string> GetStatuses()
         {
-            using (var context = new DbElements.Entities1())
+            using (var context = new DbElements.VkEntities())
             {
                 return context.Status
                     .OrderByDescending(s => s.Date)
                     .Select(s => s.Text).Take(10).ToList();
             }
         }
+
     }
 }

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.uiTimerIntervalTextBox = new System.Windows.Forms.TextBox();
             this.uiStartButton = new System.Windows.Forms.Button();
             this.uiStopButton = new System.Windows.Forms.Button();
@@ -43,6 +44,11 @@
             this.uiGetPhotosButton = new System.Windows.Forms.Button();
             this.uiGetAllAlbumPhotosButton = new System.Windows.Forms.Button();
             this.uiPhotoStatusLabel = new System.Windows.Forms.Label();
+            this.uiGetGroupContentButton = new System.Windows.Forms.Button();
+            this.uiFromOwnerIdTextBox = new System.Windows.Forms.TextBox();
+            this.uiToOwnerIdTextBox = new System.Windows.Forms.TextBox();
+            this.uiPastGroupContentButton = new System.Windows.Forms.Button();
+            this.uiNotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.SuspendLayout();
             // 
             // uiTimerIntervalTextBox
@@ -171,11 +177,58 @@
             this.uiPhotoStatusLabel.TabIndex = 12;
             this.uiPhotoStatusLabel.Text = "Выбираем пользователя, выбираем альбом или скачиваем все";
             // 
+            // uiGetGroupContentButton
+            // 
+            this.uiGetGroupContentButton.Location = new System.Drawing.Point(368, 257);
+            this.uiGetGroupContentButton.Name = "uiGetGroupContentButton";
+            this.uiGetGroupContentButton.Size = new System.Drawing.Size(104, 23);
+            this.uiGetGroupContentButton.TabIndex = 13;
+            this.uiGetGroupContentButton.Text = "get group content";
+            this.uiGetGroupContentButton.UseVisualStyleBackColor = true;
+            this.uiGetGroupContentButton.Click += new System.EventHandler(this.uiGetGroupContentButton_Click);
+            // 
+            // uiFromOwnerIdTextBox
+            // 
+            this.uiFromOwnerIdTextBox.Location = new System.Drawing.Point(478, 260);
+            this.uiFromOwnerIdTextBox.Name = "uiFromOwnerIdTextBox";
+            this.uiFromOwnerIdTextBox.Size = new System.Drawing.Size(115, 20);
+            this.uiFromOwnerIdTextBox.TabIndex = 14;
+            this.uiFromOwnerIdTextBox.Text = "-52537634";
+            // 
+            // uiToOwnerIdTextBox
+            // 
+            this.uiToOwnerIdTextBox.Location = new System.Drawing.Point(709, 260);
+            this.uiToOwnerIdTextBox.Name = "uiToOwnerIdTextBox";
+            this.uiToOwnerIdTextBox.Size = new System.Drawing.Size(115, 20);
+            this.uiToOwnerIdTextBox.TabIndex = 15;
+            this.uiToOwnerIdTextBox.Text = "-82130369";
+            // 
+            // uiPastGroupContentButton
+            // 
+            this.uiPastGroupContentButton.Location = new System.Drawing.Point(599, 258);
+            this.uiPastGroupContentButton.Name = "uiPastGroupContentButton";
+            this.uiPastGroupContentButton.Size = new System.Drawing.Size(104, 23);
+            this.uiPastGroupContentButton.TabIndex = 16;
+            this.uiPastGroupContentButton.Text = "past content";
+            this.uiPastGroupContentButton.UseVisualStyleBackColor = true;
+            this.uiPastGroupContentButton.Click += new System.EventHandler(this.uiPastGroupContentButton_Click);
+            // 
+            // uiNotifyIcon
+            // 
+            this.uiNotifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("uiNotifyIcon.Icon")));
+            this.uiNotifyIcon.Text = "vk statuser";
+            this.uiNotifyIcon.Visible = true;
+            this.uiNotifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.uiNotifyIcon_MouseDoubleClick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(868, 297);
+            this.ClientSize = new System.Drawing.Size(868, 301);
+            this.Controls.Add(this.uiPastGroupContentButton);
+            this.Controls.Add(this.uiToOwnerIdTextBox);
+            this.Controls.Add(this.uiFromOwnerIdTextBox);
+            this.Controls.Add(this.uiGetGroupContentButton);
             this.Controls.Add(this.uiPhotoStatusLabel);
             this.Controls.Add(this.uiGetAllAlbumPhotosButton);
             this.Controls.Add(this.uiGetPhotosButton);
@@ -189,9 +242,11 @@
             this.Controls.Add(this.uiStopButton);
             this.Controls.Add(this.uiStartButton);
             this.Controls.Add(this.uiTimerIntervalTextBox);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.MainForm_Load);
+            this.Resize += new System.EventHandler(this.MainForm_Resize);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -213,6 +268,11 @@
         private System.Windows.Forms.Button uiGetPhotosButton;
         private System.Windows.Forms.Button uiGetAllAlbumPhotosButton;
         private System.Windows.Forms.Label uiPhotoStatusLabel;
+        private System.Windows.Forms.Button uiGetGroupContentButton;
+        private System.Windows.Forms.TextBox uiFromOwnerIdTextBox;
+        private System.Windows.Forms.TextBox uiToOwnerIdTextBox;
+        private System.Windows.Forms.Button uiPastGroupContentButton;
+        private System.Windows.Forms.NotifyIcon uiNotifyIcon;
     }
 }
 
